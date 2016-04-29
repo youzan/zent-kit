@@ -2,7 +2,7 @@
 
 ## how to use
 
-### 创建脚手架
+### 初始化组件
 zent-kit init zent-tab
 
 ### 开发模式
