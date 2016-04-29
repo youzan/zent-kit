@@ -1,5 +1,22 @@
-$prefix: 'zent';
+$blue: #056ef0;
+$column: 200px;
 
-.#{$prefix}-title {
-    color: red;
+.menu {
+    width: calc(4 * $column);
+}
+
+.menu_link {
+    background: $blue;
+    width: $column;
+}
+
+/* after */
+
+.menu {
+    width: calc(4 * 200px);
+}
+
+.menu_link {
+    background: #056ef0;
+    width: 200px;
 }

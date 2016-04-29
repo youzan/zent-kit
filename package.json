@@ -1,6 +1,6 @@
 {
-  "name": "zent-kit",
-  "version": "0.1.0",
+  "name": "@youzan/zent-kit",
+  "version": "0.1.1",
   "description": "zent组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,6 @@
   "license": "ISC",
   "dependencies": {
     "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
-    "css-loader": "^0.23.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-less": "^3.0.5",
@@ -35,17 +33,23 @@
     "koa": "^1.2.0",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
-    "less-loader": "^2.2.1",
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "react": "^15.0.1",
     "react-addons-perf": "^15.0.1",
     "react-dom": "^15.0.1",
     "run-sequence": "^1.1.5",
-    "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
     "vinyl-named": "^1.1.0",
     "webpack": "^1.13.0",
     "webpack-livereload-plugin": "^0.8.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.23.1",
+    "less-loader": "^2.2.1",
+    "postcss-loader": "^0.8.2",
+    "precss": "^1.4.0"
   }
 }

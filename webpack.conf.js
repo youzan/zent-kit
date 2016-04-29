@@ -1,5 +1,7 @@
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var path = require('path');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 var babelLoader = path.resolve(__dirname, './node_modules/babel-loader') + '?stage=0';
 
@@ -10,8 +12,11 @@ module.exports = function(entry, output) {
             loaders: [
                 { test: /\.(es6|js|jsx)$/, loader: babelLoader},
                 { test: /\.less$/, loader: 'style!less' },
-                { test: /\.scss$/, loader: 'css!sass'}
+                { test: /\.scss$/, loader: 'css!postcss'}
             ]
+        },
+        postcss: function () {
+            return [precss, autoprefixer];
         },
         entry: [
             entry
