@@ -10,7 +10,7 @@ var gutil = require('gulp-util');
 var cwd = process.cwd();    // 执行命令所在目录
 
 var paths = {
-  index: path.resolve(cwd, './src/index.jsx'),  // index源文件
+  index: path.resolve(__dirname, '../index.jsx'),  // index源文件
   assets: path.resolve(cwd, './assets/**/*'), // assets
   tmp: path.join(__dirname, '../.tmp'),    // index拷贝目录
   script: path.join(cwd, '/examples/**/*.js'),  // 需要监听的examples文件
@@ -45,4 +45,4 @@ gulp.task('webpack', function(callback) {
     })
 });
 
-runSequence(['initCopy', 'webpack']);
+runSequence('initCopy', 'webpack');
