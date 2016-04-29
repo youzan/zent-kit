@@ -1,3 +1,4 @@
 node_modules
+!scaffold/node_modules
 build
 .tmp

@@ -15,19 +15,16 @@ module.exports = function(name) {
     });
 
     gulp.task('install', function() {
-        var dependencies = ['babel-core', 'babel-loader', 'sass-loader', 'css-loader', 'less-loader'];
-        var basePath = path.resolve(__dirname, '../node_modules');
-        var modules = dependencies.map(function(item) {
-            return (basePath + '/' + item);
-        })
-        console.log(modules);
-        console.log(path.resolve(cwd, './' + name + 'node_modules'));
-        return gulp.src(modules)
-            .pipe(gulp.dest(path.resolve(cwd, './' + name + '/node_modules')))
-            .on('end', function () {
-                console.log('初始化成功!');
+        var dependencies = ['react'];
+        console.log('安装依赖')
+        ch.exec('which npm', function(err, stdout, stderr) {
+            var path = stdout.toString().trim();
+            var command = path + ' i ' + dependencies.join(' ') + ' --registry="http://registry.npm.qima-inc.com"';
+            ch.exec(command, {cwd: cwd + '/' + name}, function(err, stdout, stderr) {
+                console.log(stdout + '');
             });
+        });
     });
 
-    runSequence('copy');
+    runSequence('copy', 'install');
 }
