@@ -1,0 +1,20 @@
+{
+  "name": "@youzan/zent-seed",
+  "version": "0.0.1",
+  "description": "这是一个react组件",
+  "main": "./lib/Seed.js",
+  "scripts": {
+    "prepublish": "zent-kit prepublish"
+  },
+  "author": "who r u",
+  "license": "MIT",
+  "files": [
+    "assets/",
+    "lib/",
+    "examples/",
+    "src/"
+  ],
+  "dependencies": {
+    "react": "^15.0.x"
+  }
+}

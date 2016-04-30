@@ -1,29 +1,50 @@
 #!/usr/bin/env node
 var args = process.argv.splice(2);
+var currentDir = process.cwd();
+var kitDir = __dirname;
+var logger = console.log.bind(console);
+var information = require('./bin/information');
+
+logger('-------------------------------------------------->');
 
 if (args.length === 0) {
-    console.log('未传入任何参数');
+    information(kitDir);
     return;
 }
 
 var operation = args[0];
-var init = require('./bin/init');
 
 switch(operation) {
     case 'init':
+        logger('-> 初始化项目\n');
+
         if (!args[1]) {
-            return;
+            logger('   sir: we need a project name');
+            break;
         }
+        var init = require('./bin/init');
         init(args[1]);
         break;
     case 'dev':
-        console.log('开发模式');
+        logger('-> 开发者模式\n');
+
         require('./bin/server');
         require('./bin/build');
         break;
     case 'prepublish':
-        console.log('发布之前的预处理');
+        logger('-> 发布预处理\n');
+
+        break;
     case 'test':
-        console.log(process.cwd());
-        console.log(__dirname);
+        logger(currentDir);
+        logger(kitDir);
+
+        break;
+    case '-v':
+    case '--version':
+        information('version');
+
+        break;
+    default:
+        information(kitDir);
 }

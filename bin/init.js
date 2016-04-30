@@ -4,26 +4,30 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var ch = require('child_process');
 
-var cwd = process.cwd();
+var logger = console.log.bind(console);
+var projectDir = process.cwd();
 
 module.exports = function(name) {
 
-    // 假设还没同名的文件夹
+    // 项目规范文件拷贝
     gulp.task('copy', function () {
-        console.log('开始初始化')
+        logger('----> 开始初始化')
+
         return gulp.src(path.resolve(__dirname, '../scaffold/**/*'))
-            .pipe(gulp.dest(path.resolve(cwd, './' + name)));
+            .pipe(gulp.dest(path.resolve(projectDir, './' + name)));
     });
 
+    // 项目依赖安装
     gulp.task('install', function() {
+        logger('----> 安装依赖....')
+
         var dependencies = ['react'];
-        console.log('安装依赖....')
         ch.exec('which npm', function(err, stdout, stderr) {
-            var path = stdout.toString().trim();
-            var command = path + ' i ' + dependencies.join(' ') + ' --registry="http://registry.npm.qima-inc.com"';
-            ch.exec(command, {cwd: cwd + '/' + name}, function(err, stdout, stderr) {
-                console.log(stdout + '');
-                console.log('初始化完成！')
+            var Npath = stdout.toString().trim();
+            var command = Npath + ' i ' + dependencies.join(' ') + ' --registry="http://registry.npm.qima-inc.com"';
+            ch.exec(command, {cwd: projectDir + '/' + name}, function(err, stdout, stderr) {
+                logger(stdout + '');
+                logger('----> 初始化完成！')
             });
         });
     });

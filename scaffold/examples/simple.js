@@ -1,8 +1,9 @@
 import React from 'react';
+import '../src/Seed.js';
 import '../assets/index.scss';
 
 const Simple = function(props) {
-    return <div className="zent-title">举个栗子</div>;
+    return <Seed />
 }
 
 export default Simple;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Index = function(props) {
+const Seed = function(props) {
     return <div className="zent-title">code</div>;
 }
 
-export default Index;
+export default Seed;
