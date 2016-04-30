@@ -1,7 +1,7 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.1.4",
-  "description": "zent组件开发工具",
+  "version": "0.1.5",
+  "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -27,11 +27,11 @@
     "babel-loader": "^5.3.2",
     "css-loader": "^0.23.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-less": "^3.0.5",
+    "gulp-babel": "^5.3.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-postcss": "^6.1.0",
     "gulp-rimraf": "^0.2.0",
     "gulp-sym": "0.0.14",
-    "gulp-template": "^4.0.0",
     "gulp-util": "^3.0.7",
     "highlight": "^0.2.4",
     "koa": "^1.2.0",
@@ -41,6 +41,7 @@
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "postcss-loader": "^0.8.2",
+    "postcss-scss": "^0.1.7",
     "precss": "^1.4.0",
     "react": "^15.0.1",
     "react-addons-perf": "^15.0.1",

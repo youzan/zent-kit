@@ -13,7 +13,7 @@ module.exports = function(name) {
     gulp.task('copy', function () {
         logger('----> 开始初始化')
 
-        return gulp.src(path.resolve(__dirname, '../scaffold/**/*'))
+        return gulp.src(path.resolve(__dirname, '../scaffold/**/*'), { dot: true })
             .pipe(gulp.dest(path.resolve(projectPath, './' + name)));
     });
 

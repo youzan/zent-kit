@@ -1,4 +1,4 @@
-#zent kit for develop zent Component
+#Zent Kit to Develop React Component
 
 ## how to use
 

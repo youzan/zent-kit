@@ -12,6 +12,11 @@ if (args.length === 0) {
     return;
 }
 
+if (projectDir === kitDir) {
+    logger('-> 请勿在zent-kit目录下运行命令');
+    return;
+}
+
 var operation = args[0];
 
 switch(operation) {
@@ -38,6 +43,8 @@ switch(operation) {
         break;
     case 'prepublish':
         logger('-> 发布预处理\n');
+
+        require('./bin/prepublish');
 
         break;
     case 'test':

@@ -1,44 +1,42 @@
 var path = require('path');
 var gulp = require('gulp');
-var babel = require('gulp-babel');
-var less = require('gulp-less');
-var sass = require('gulp-sass');
-var clean = require('gulp-clean');
-var fs = require('fs');
 var runSequence = require('run-sequence');
-var template = require('gulp-template');
-var gutil = require('gulp-util');
+var babel = require('gulp-babel');
+var fs = require('fs');
+var clean = require('gulp-clean');
+var _ = require('lodash');
+var postcss = require('gulp-postcss');
+var scss = require('postcss-scss');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
-var cwd = process.cwd();
-var config = require(`${process.cwd()}/package.json`);
-var cssName = config.name.split('/')[1] ? config.name.split('/')[1] : 'index'
+var checkfile = require('./checkfile');
+var logger = console.log.bind(console);
+
+var projectPath = process.cwd();
+var config = require(`${projectPath}/package.json`);
 var paths = {
-        script: [path.join(cwd, '/src/**/*.jsx'), path.join(cwd, '/src/**/*.js')],
-        scriptPath: path.join(cwd, '/src'),
-        dest: path.join(cwd, '/lib/'),
-        css: [path.join(cwd, 'assets', 'index')],
-        readmeSrc: path.join(__dirname, '../src/readme.md'),    // 所有目录的src将会在此
-        readmeDest: path.join(cwd)
+        projectPath: projectPath,
+        src: path.join(projectPath, '/src'),
+        dest: path.join(projectPath, '/lib/'),
+        readmeSrc: path.join(__dirname, '../sources/readme.md'),    // 项目readme的源文件
     };
 
-gulp.task('clean', function() {
-  gutil.log('clean lib');
-  return gulp.src(paths.dest + '*', {read: false})
-    .pipe(clean({force: true}));
-})
-
-var fileList = [];
+// 读取src下文件
 function getContent(path) {
+    var fileList = [];
     var files = fs.readdirSync(path);
     files.forEach(function(item) {
         if (fs.statSync(path + '/' + item).isDirectory()) {
-            getContent(path + '/' + item);
+            fileList.concat(getContent(path + '/' + item));
         } else {
-            /(.js|.jsx|.es6)$/.test(item) && fs.existsSync(path + '/' + item) && fileList.push(fs.readFileSync(path + '/' + item, 'utf8'));
+            /(.js|.jsx|.es6)$/.test(item) && fs.accessSync(path + '/' + item) && fileList.push(fs.readFileSync(path + '/' + item, 'utf8'));
         }
     })
+    return fileList;
 }
 
+// 筛选src文件的注释
 function getComment(list) {
     var result = [];
     list.forEach(function(item) {
@@ -53,37 +51,47 @@ function getComment(list) {
     return result.join('');
 }
 
-gulp.task('prepare-md', function() {
-  gutil.log('prepare readme');
-  getContent(paths.scriptPath);
-  var comments = getComment(fileList);
-
-    gulp.src(paths.readmeSrc)
-        .pipe(template(Object.assign({
-            comments: comments
-        }, config)))
-        .pipe(gulp.dest(paths.readmeDest));
+// 旧文件 删除
+gulp.task('clean', function() {
+    logger('------->   Clean  lib');
+  return gulp.src(paths.dest + '*', {read: false})
+    .pipe(clean({force: true}));
 });
 
-gulp.task('prepare-js', function() {
-  gutil.log('prepare js files');
-  gulp.src(paths.script)
+// readme 制作
+gulp.task('prepare:md', function() {
+    logger('-------> Prepare  README');
+
+  var files = getContent(paths.src);
+  var comments = getComment(files);
+  var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
+            comments: comments
+        }, config));
+
+  fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
+});
+
+// js 转码
+gulp.task('prepare:js', function() {
+    logger('-------> Prepare  JS');
+
+  gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
     .pipe(babel({stage:0}))
     .pipe(gulp.dest(paths.dest));
 })
 
-gulp.task('prepare-css', function () {
-  gutil.log('prepare css files');
-    if(fs.existsSync(paths.css + '.scss')) {
-      gulp.src(paths.css + '.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(paths.dest));
-    }
-    if(fs.existsSync(paths.css + '.less')) {
-      gulp.src(paths.css + '.less')
-        .pipe(less())
-        .pipe(gulp.dest(paths.dest));
+// css 转码
+gulp.task('prepare:css', function () {
+    logger('-------> Prepare  CSS');
+
+    var name = config.zent && config.zent.sass ? config.zent.sass : 'index'
+    var cssPath = checkfile('assets/' + name + '.scss');
+    if(cssPath) {
+        var processors = [precss, autoprefixer];
+        gulp.src(cssPath)
+            .pipe(postcss(processors, {syntax: scss}))
+            .pipe(gulp.dest(paths.dest));
     }
 });
 
-runSequence(['clean', 'prepare-md', 'prepare-js', 'prepare-css']);
+runSequence(['clean', 'prepare:md', 'prepare:css', 'prepare:js']);
