@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var args = process.argv.splice(2);
-var currentDir = process.cwd();
+var projectDir = process.cwd();
 var kitDir = __dirname;
 var logger = console.log.bind(console);
 var information = require('./bin/information');
@@ -24,19 +24,24 @@ switch(operation) {
         }
         var init = require('./bin/init');
         init(args[1]);
+
         break;
     case 'dev':
         logger('-> 开发者模式\n');
 
-        require('./bin/server');
-        require('./bin/build');
+        var checkfile = require('./bin/checkfile');
+        if (checkfile('examples')) {
+            require('./bin/server');
+            require('./bin/build');
+        }
+
         break;
     case 'prepublish':
         logger('-> 发布预处理\n');
 
         break;
     case 'test':
-        logger(currentDir);
+        logger(projectDir);
         logger(kitDir);
 
         break;

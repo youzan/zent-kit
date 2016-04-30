@@ -4,6 +4,7 @@
   "description": "这是一个react组件",
   "main": "./lib/Seed.js",
   "scripts": {
+    "dev": "zent-kit dev",
     "prepublish": "zent-kit prepublish"
   },
   "author": "who r u",

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zent Kit - Develop Tools for React</title>
+  <link rel="stylesheet" href="/highlight.css">
+  <link rel="stylesheet" href="/css/react-salt-ui.css">
+  <link rel="stylesheet" href="/layout.css">
+</head>
+<body>
+<div class="container-fluid">
+      <div class="salt-panel salt-panel-default">
+        <ul class="salt-panel-body list-group demo-header-list">
+        <% navList.forEach(function(nav) { %>
+          <li><a href=<%- nav %>><%- nav %></a></li>
+        <% }) %>
+        </ul>
+      </div>
+    <div class="row">
+      <% if(script) { %>
+        <div class="col-md-12">
+            <div class="salt-panel salt-panel-default">
+              <div class="salt-panel-body">
+                <div id="react-component-container"></div>
+              </div>
+            </div>
+            <script>
+              window.Component = '<%= script %>';
+            </script>
+            <script src="/main.js"></script>
+        </div>
+      <% } %>
+        <div class="<%= script ? 'col-md-12' : 'col-md-24' %>">
+          <% if(readme !== '') { %>
+            <pre><code><%= readme %></code></pre>
+          <% } %>
+
+          <% if(code) { %>
+            <pre><code><%= code %></code></pre>
+          <% } %>
+        </div>
+    </div>
+</div>
+
+<script src="http://127.0.0.1:35729/livereload.js"></script>
+</body>
+</html>

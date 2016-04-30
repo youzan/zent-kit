@@ -14,7 +14,7 @@ var config = require(`${process.cwd()}/package.json`);
 var cssName = config.name.split('/')[1] ? config.name.split('/')[1] : 'index'
 var paths = {
         script: [path.join(cwd, '/src/**/*.jsx'), path.join(cwd, '/src/**/*.js')],
-        scriptDir: path.join(cwd, '/src'),
+        scriptPath: path.join(cwd, '/src'),
         dest: path.join(cwd, '/lib/'),
         css: [path.join(cwd, 'assets', 'index')],
         readmeSrc: path.join(__dirname, '../src/readme.md'),    // 所有目录的src将会在此
@@ -55,7 +55,7 @@ function getComment(list) {
 
 gulp.task('prepare-md', function() {
   gutil.log('prepare readme');
-  getContent(paths.scriptDir);
+  getContent(paths.scriptPath);
   var comments = getComment(fileList);
 
     gulp.src(paths.readmeSrc)
