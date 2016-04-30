@@ -19,7 +19,7 @@ var paths = {
         projectPath: projectPath,
         src: path.join(projectPath, '/src'),
         dest: path.join(projectPath, '/lib/'),
-        readmeSrc: path.join(__dirname, '../sources/readme.md'),    // 项目readme的源文件
+        readmeSrc: path.join(__dirname, '../manuel/readme.md'),    // 项目readme的源文件
     };
 
 // 读取src下文件

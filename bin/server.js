@@ -15,12 +15,12 @@ var app = koa(),
 
 var projectPath = process.cwd();
 var paths = {
-    sourcesPath: path.resolve(__dirname, '../sources'), //  服务端资源
+    manuelPath: path.resolve(__dirname, '../manuel'), //  服务端资源
     assetsPath: path.resolve(__dirname, '../assets'),   // 服务端静态资源
     tmp: path.resolve(__dirname, '../.tmp'),    // 服务端开发文件
     projectPath: projectPath   //  开发项目路径
 };
-var layout = fs.readFileSync(paths.sourcesPath + '/layout.html');
+var layout = fs.readFileSync(paths.manuelPath + '/layout.html');
 
 
 var files = fs.readdirSync(paths.projectPath + '/examples');

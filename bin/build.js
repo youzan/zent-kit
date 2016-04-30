@@ -12,7 +12,7 @@ var projectPath = process.cwd();    // 执行命令所在目录
 
 var paths = {
   webpack: path.resolve(__dirname, '../webpack.conf.js'),   // webpack
-  index: path.resolve(__dirname, '../sources/index.jsx'),  // index源文件
+  index: path.resolve(__dirname, '../manuel/index.jsx'),  // index源文件
   tmp: path.resolve(__dirname, '../.tmp'),    // 拷贝临时目录
   examples: path.resolve(projectPath, './examples')  // 需要监听的examples文件
 };
