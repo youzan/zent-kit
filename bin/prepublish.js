@@ -54,30 +54,31 @@ function getComment(list) {
 // 旧文件 删除
 gulp.task('clean', function() {
     logger('------->   Clean  lib');
-  return gulp.src(paths.dest + '*', {read: false})
-    .pipe(clean({force: true}));
+
+    return gulp.src(paths.dest + '*', {read: false})
+        .pipe(clean({force: true}));
 });
 
 // readme 制作
 gulp.task('prepare:md', function() {
     logger('-------> Prepare  README');
 
-  var files = getContent(paths.src);
-  var comments = getComment(files);
-  var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
+    var files = getContent(paths.src);
+    var comments = getComment(files);
+    var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
             comments: comments
         }, config));
 
-  fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
+    fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
 });
 
 // js 转码
 gulp.task('prepare:js', function() {
     logger('-------> Prepare  JS');
 
-  gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
-    .pipe(babel({stage:0}))
-    .pipe(gulp.dest(paths.dest));
+    gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
+        .pipe(babel({stage:0}))
+        .pipe(gulp.dest(paths.dest));
 })
 
 // css 转码

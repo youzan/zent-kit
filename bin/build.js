@@ -7,6 +7,8 @@ var symlink = require('gulp-sym');
 var runSequence = require('run-sequence');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var logger = console.log.bind(console);
 
 var projectPath = process.cwd();    // 执行命令所在目录
 
@@ -22,7 +24,16 @@ gulp.task('index', function() {
         .pipe(gulp.dest(paths.tmp));
 });
 
+// 部分情况下不清楚链接会发生错误
+gulp.task('clean', function() {
+    logger('------->   Clean  old examples');
+
+    return gulp.src(paths.tmp + '/examples', {read: false})
+        .pipe(clean({force: true}));
+});
+
 gulp.task('examples', function() {
+    logger('------->    Read  new examples');
     return gulp.src(paths.examples)
         .pipe(symlink(paths.tmp + '/examples', {force: true}));
 });
@@ -34,4 +45,4 @@ gulp.task('webpack', function(callback) {
     })
 });
 
-runSequence(['index', 'examples'], 'webpack');
+runSequence(['index', 'clean', 'examples'], 'webpack');
