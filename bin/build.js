@@ -24,7 +24,7 @@ gulp.task('index', function() {
         .pipe(gulp.dest(paths.tmp));
 });
 
-// 部分情况下不清楚链接会发生错误
+// 部分情况下不清除链接会发生错误
 gulp.task('clean', function() {
     logger('------->   Clean  old examples');
 
@@ -45,4 +45,4 @@ gulp.task('webpack', function(callback) {
     })
 });
 
-runSequence(['index', 'clean', 'examples'], 'webpack');
+runSequence('clean', ['index', 'examples'], 'webpack');
