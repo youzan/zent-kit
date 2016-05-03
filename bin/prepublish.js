@@ -30,7 +30,7 @@ function getContent(path) {
         if (fs.statSync(path + '/' + item).isDirectory()) {
             fileList.concat(getContent(path + '/' + item));
         } else {
-            /(.js|.jsx|.es6)$/.test(item) && fs.accessSync(path + '/' + item) && fileList.push(fs.readFileSync(path + '/' + item, 'utf8'));
+            /(.js|.jsx|.es6)$/.test(item) && fileList.push(fs.readFileSync(path + '/' + item, 'utf8'));
         }
     })
     return fileList;

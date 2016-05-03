@@ -24,16 +24,16 @@ gulp.task('index', function() {
         .pipe(gulp.dest(paths.tmp));
 });
 
-// 部分情况下不清除链接会发生错误
 gulp.task('clean', function() {
     logger('------->   Clean  old examples');
 
-    return gulp.src(paths.tmp + '/examples', {read: false})
+    return gulp.src(paths.tmp + '/*', {read: false})
         .pipe(clean({force: true}));
 });
 
-gulp.task('examples', function() {
+gulp.task('link:examples', function() {
     logger('------->    Read  new examples');
+
     return gulp.src(paths.examples)
         .pipe(symlink(paths.tmp + '/examples', {force: true}));
 });
@@ -45,4 +45,4 @@ gulp.task('webpack', function(callback) {
     })
 });
 
-runSequence('clean', ['index', 'examples'], 'webpack');
+runSequence('clean', ['index', 'link:examples'], 'webpack');

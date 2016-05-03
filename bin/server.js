@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-var  _            = require('lodash');
-var  fs           = require('fs');
-var  path         = require('path');
-var  koa          = require('koa');
-var  koarouter    = require('koa-router');
-var  koastatic    = require('koa-static');
-var  highlight    = require('highlight').Highlight;
-var  marked       = require('marked');
+var _ = require('lodash');
+var fs = require('fs');
+var path = require('path');
+var koa = require('koa');
+var koarouter = require('koa-router');
+var koastatic = require('koa-static');
+var highlight = require('highlight').Highlight;
+var marked = require('marked');
+var open = require('open');
+
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
-
 var app = koa(),
     router = koarouter();
 
@@ -96,3 +97,6 @@ var port = (config.zent && config.zent.port) || 7777;
 app.listen(port);
 logger('-------> Server started on %s', port);
 logger('<--------------------------------------------------\n');
+
+// 启动浏览器
+open('http://localhost:' + port);

@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.qima-inc.com:zhangmengxuan/zent-kit.git"
+    "url": "git@gitlab.qima-inc.com:zent/zent-kit.git"
   },
   "keywords": [
     "zent",
@@ -37,9 +37,9 @@
     "koa": "^1.2.0",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
-    "less-loader": "^2.2.1",
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
+    "open": "0.0.5",
     "postcss-loader": "^0.8.2",
     "postcss-scss": "^0.1.7",
     "precss": "^1.4.0",
