@@ -1,10 +1,7 @@
-# <%= name %>
+# Hi
 
-<%= description %>
+欢迎使用zent-kit来初始化你的react项目，接下来就可以愉快的开发了~
 
-[![version][version-image]][download-url]
+## 注意：
 
-[version-image]: https://img.shields.io/badge/cnpm-<%= version %>-red.svg?style=flat-square
-[download-url]: http://npm.qima-inc.com/package/<%= name %>
-
-<%= comments %>
+* 不需要手动维护readme，在publish的时候可以自动生成

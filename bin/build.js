@@ -7,15 +7,16 @@ var symlink = require('gulp-sym');
 var runSequence = require('run-sequence');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var logger = console.log.bind(console);
 
-var cwd = process.cwd();    // 执行命令所在目录
+var projectPath = process.cwd();    // 执行命令所在目录
 
 var paths = {
-  index: path.resolve(__dirname, '../index.jsx'),  // index源文件
-  assets: path.resolve(cwd, './assets'), // assets
-  tmp: path.join(__dirname, '../.tmp'),    // index拷贝目录
-  examples: path.join(cwd, '/examples'),  // 需要监听的examples文件
-  scriptDest: path.resolve(cwd, './build/')  // 开发编译文件
+  webpack: path.resolve(__dirname, '../webpack.conf.js'),   // webpack
+  index: path.resolve(__dirname, '../manuel/index.jsx'),  // index源文件
+  tmp: path.resolve(__dirname, '../.tmp'),    // 拷贝临时目录
+  examples: path.resolve(projectPath, './examples')  // 需要监听的examples文件
 };
 
 gulp.task('index', function() {
@@ -23,21 +24,25 @@ gulp.task('index', function() {
         .pipe(gulp.dest(paths.tmp));
 });
 
-gulp.task('assets', function() {
-    return gulp.src(paths.assets)
-        .pipe(symlink(paths.tmp + '/assets', {force: true}));
-})
+// 部分情况下不清除链接会发生错误
+gulp.task('clean', function() {
+    logger('------->   Clean  old examples');
+
+    return gulp.src(paths.tmp + '/examples', {read: false})
+        .pipe(clean({force: true}));
+});
 
 gulp.task('examples', function() {
+    logger('------->    Read  new examples');
     return gulp.src(paths.examples)
         .pipe(symlink(paths.tmp + '/examples', {force: true}));
 });
 
-var webpackConfig = require(path.resolve(__dirname, '../webpack.conf.js'))(path.join(paths.tmp, 'index.jsx'), paths.scriptDest);
+var webpackConfig = require(paths.webpack)(path.join(paths.tmp, 'index.jsx'), path.join(paths.tmp, 'build'));
 gulp.task('webpack', function(callback) {
     webpack(webpackConfig, function(err, stats) {
         gutil.log('[webpack]', stats.toString({}));
     })
 });
 
-runSequence(['index', 'assets', 'examples'], 'webpack');
+runSequence('clean', ['index', 'examples'], 'webpack');

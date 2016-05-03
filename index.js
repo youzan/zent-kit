@@ -1,29 +1,62 @@
 #!/usr/bin/env node
 var args = process.argv.splice(2);
+var projectDir = process.cwd();
+var kitDir = __dirname;
+var logger = console.log.bind(console);
+var information = require('./bin/information');
+
+logger('-------------------------------------------------->');
 
 if (args.length === 0) {
-    console.log('未传入任何参数');
+    information(kitDir);
+    return;
+}
+
+if (projectDir === kitDir) {
+    logger('-> 请勿在zent-kit目录下运行命令');
     return;
 }
 
 var operation = args[0];
-var init = require('./bin/init');
 
 switch(operation) {
     case 'init':
+        logger('-> 初始化项目\n');
+
         if (!args[1]) {
-            return;
+            logger('   sir: we need a project name');
+            break;
         }
+        var init = require('./bin/init');
         init(args[1]);
+
         break;
     case 'dev':
-        console.log('开发模式');
-        require('./bin/server');
-        require('./bin/build');
+        logger('-> 开发者模式\n');
+
+        var checkfile = require('./bin/checkfile');
+        if (checkfile('examples')) {
+            require('./bin/server');
+            require('./bin/build');
+        }
+
         break;
     case 'prepublish':
-        console.log('发布之前的预处理');
+        logger('-> 发布预处理\n');
+
+        require('./bin/prepublish');
+
+        break;
     case 'test':
-        console.log(process.cwd());
-        console.log(__dirname);
+        logger(projectDir);
+        logger(kitDir);
+
+        break;
+    case '-v':
+    case '--version':
+        information('version');
+
+        break;
+    default:
+        information(kitDir);
 }

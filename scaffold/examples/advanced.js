@@ -4,6 +4,8 @@
 You can write guides for users here
 */
 import React, { Component } from 'react';
+import Seed from '../src/Seed.js';
+import '../assets/index.scss';
 
 export default class Advanced extends Component {
     constructor(props) {
@@ -17,6 +19,11 @@ export default class Advanced extends Component {
     }
 
     render() {
-        return <div onClick={this.onClick}>Click here!</div>;
+        return (
+            <div onClick={this.onClick}>
+                Click here!
+                <Seed />
+            </div>
+        );
     }
 }
