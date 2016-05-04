@@ -23,5 +23,5 @@ zent-kit dev
 ### 发布
 
 ```bash
-zent-kit prebulish
+zent-kit prepublish
 ```
