@@ -1,6 +1,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
+var rename = require('gulp-rename');
 var babel = require('gulp-babel');
 var fs = require('fs');
 var clean = require('gulp-clean');
@@ -72,11 +73,19 @@ gulp.task('prepare:md', function() {
     fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
 });
 
+gulp.task('prepare:js', ['compile:js'], function() {
+    gulp.src(path.join(paths.dest, '/**/*.js'))
+        .pipe(rename({
+            extname: '.jsx'
+        }))
+        .pipe(gulp.dest(paths.dest));
+});
+
 // js 转码
-gulp.task('prepare:js', function() {
+gulp.task('compile:js', function() {
     logger('-------> Prepare  JS');
 
-    gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
+    return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
         .pipe(babel({stage:0}))
         .pipe(gulp.dest(paths.dest));
 })
