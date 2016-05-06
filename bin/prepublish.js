@@ -10,6 +10,8 @@ var postcss = require('gulp-postcss');
 var scss = require('postcss-scss');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var webpack = require('webpack');
+var gutil = require('gulp-util');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
@@ -19,8 +21,11 @@ var config = require(`${projectPath}/package.json`);
 var paths = {
         projectPath: projectPath,
         src: path.join(projectPath, '/src'),
-        dest: path.join(projectPath, '/lib/'),
-        readmeSrc: path.join(__dirname, '../manuel/readme.md'),    // 项目readme的源文件
+        lib: path.join(projectPath, '/lib/'),
+        dist: path.join(projectPath, '/dist/'),
+        index: path.join(projectPath, '/src/Index'),
+        webpack: path.resolve(__dirname, '../webpack.prepublish.js'),   // webpack
+        readmeSrc: path.join(__dirname, '../manuel/readme.md')    // 项目readme的源文件
     };
 
 // 读取src下文件
@@ -56,7 +61,7 @@ function getComment(list) {
 gulp.task('clean', function() {
     logger('------->   Clean  lib');
 
-    return gulp.src(paths.dest + '*', {read: false})
+    return gulp.src([paths.lib + '*'], {read: false})
         .pipe(clean({force: true}));
 });
 
@@ -73,22 +78,22 @@ gulp.task('prepare:md', function() {
     fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
 });
 
-gulp.task('prepare:js', ['compile:js'], function() {
-    gulp.src(path.join(paths.dest, '/**/*.js'))
+gulp.task('prepare:js', ['webpack'], function() {
+    logger('-------> Prepare  JS');
+    
+    gulp.src(path.join(paths.dist, '/**/*.js'))
         .pipe(rename({
             extname: '.jsx'
         }))
-        .pipe(gulp.dest(paths.dest));
+        .pipe(gulp.dest(paths.dist));
 });
 
 // js 转码
-gulp.task('compile:js', function() {
-    logger('-------> Prepare  JS');
-
+gulp.task('babel', function() {
     return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
         .pipe(babel({stage:0}))
-        .pipe(gulp.dest(paths.dest));
-})
+        .pipe(gulp.dest(paths.lib));
+});
 
 // css 转码
 gulp.task('prepare:css', function () {
@@ -100,8 +105,16 @@ gulp.task('prepare:css', function () {
         var processors = [precss, autoprefixer];
         gulp.src(cssPath)
             .pipe(postcss(processors, {syntax: scss}))
-            .pipe(gulp.dest(paths.dest));
+            .pipe(gulp.dest(paths.lib));
     }
+});
+
+var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
+gulp.task('webpack', ['babel'], function(callback) {
+    webpack(webpackConfig, function(err, stats) {
+        gutil.log('[webpack]', stats.toString({}));
+        callback();
+    });
 });
 
 runSequence(['clean', 'prepare:md', 'prepare:css', 'prepare:js']);
