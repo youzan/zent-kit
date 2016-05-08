@@ -1,4 +1,4 @@
-#Zent Kit to Develop React Component
+# Zent Kit to Develop React Component
 
 ## install
 
