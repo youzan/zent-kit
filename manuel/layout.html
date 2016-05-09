@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>Zent Kit - Develop Tools for React</title>
-  <link rel="stylesheet" href="/highlight.css">
-  <link rel="stylesheet" href="/css/react-salt-ui.css">
-  <link rel="stylesheet" href="/layout.css">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <link rel="stylesheet" href="http://react.fe.qima-inc.com/style/css/index.css">
+  <link rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
 <div class="container-fluid">
@@ -17,7 +18,7 @@
       </div>
     <div class="row">
       <% if(script) { %>
-        <div class="col-md-12">
+        <div class="zol-md-12">
             <div class="salt-panel salt-panel-default">
               <div class="salt-panel-body">
                 <div id="react-component-container"></div>
@@ -29,7 +30,7 @@
             <script src="/main.js"></script>
         </div>
       <% } %>
-        <div class="<%= script ? 'col-md-12' : 'col-md-24' %>">
+        <div class="<%= script ? 'zol-md-12' : 'zol-md-24' %>">
           <% if(readme !== '') { %>
             <pre><code><%= readme %></code></pre>
           <% } %>

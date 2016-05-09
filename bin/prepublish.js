@@ -112,7 +112,8 @@ gulp.task('prepare:css', function () {
 var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
 gulp.task('webpack', ['babel'], function(callback) {
     webpack(webpackConfig, function(err, stats) {
-        gutil.log('[webpack]', stats.toString({}));
+        // install、publish都会触发prepublish操作，这里在prepublish不打印明细
+        // gutil.log('[webpack]', stats.toString({}));
         callback();
     });
 });
