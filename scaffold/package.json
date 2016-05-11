@@ -2,7 +2,7 @@
   "name": "@youzan/zent-seed",
   "version": "0.0.1",
   "description": "这是一个react组件",
-  "main": "./lib/Seed.js",
+  "main": "./lib/Index.js",
   "scripts": {
     "dev": "zent-kit dev",
     "prepublish": "zent-kit prepublish"
@@ -13,7 +13,8 @@
     "assets/",
     "lib/",
     "examples/",
-    "src/"
+    "src/",
+    "dist/"
   ],
   "dependencies": {
     "react": "^15.0.x"

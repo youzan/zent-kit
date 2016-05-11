@@ -1,5 +1,5 @@
 import React from 'react';
-import Seed from '../src/Seed.js';
+import Seed from '../src/Index.js';
 import '../assets/index.scss';
 
 const Simple = function(props) {

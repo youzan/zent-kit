@@ -4,7 +4,7 @@
 You can write guides for users here
 */
 import React, { Component } from 'react';
-import Seed from '../src/Seed.js';
+import Seed from '../src/Index.js';
 import '../assets/index.scss';
 
 export default class Advanced extends Component {
