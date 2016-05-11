@@ -10,15 +10,15 @@
 <body>
 <div class="container-fluid">
       <div class="salt-panel salt-panel-default">
-        <ul class="salt-panel-body list-group demo-header-list">
+        <ul class="salt-panel-body list-group demo-header-list row">
         <% navList.forEach(function(nav) { %>
-          <li><a href=<%- nav %>><%- nav %></a></li>
+          <li class="zol-sm-10 zol-sm-offset-2"><a href=<%- nav %>><%- nav %></a></li>
         <% }) %>
         </ul>
       </div>
     <div class="row">
       <% if(script) { %>
-        <div class="zol-md-12">
+        <div class="zol-lg-12">
             <div class="salt-panel salt-panel-default">
               <div class="salt-panel-body">
                 <div id="react-component-container"></div>
@@ -30,7 +30,7 @@
             <script src="/main.js"></script>
         </div>
       <% } %>
-        <div class="<%= script ? 'zol-md-12' : 'zol-md-24' %>">
+        <div class="<%= script ? 'zol-lg-12' : 'zol-lg-24' %>">
           <% if(readme !== '') { %>
             <pre><code><%= readme %></code></pre>
           <% } %>
