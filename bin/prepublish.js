@@ -49,7 +49,11 @@ function getComment(list) {
         var tmp = item.match(/\/\*(.|\s)+?\*\//g);
         if (tmp) {
             result = result.concat(tmp.map(function(value) {
-                return value.slice(2, -2);
+                if (value.match(/^\/\*\*/g)) {
+                    return value.slice(3, -2);
+                } else {
+                    return value.slice(2, -2);
+                }
             }))
         }
     });
