@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Seed = function(props) {
-    return <div className="zent-title">seed</div>;
+const Seed = function () {
+  return <div className="zent-title">seed</div>;
 }
 
 export default Seed;

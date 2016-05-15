@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "zent-kit dev",
     "lint": "node node_modules/eslint/bin/eslint ./src",
-    "prepublish": "npm run link && zent-kit prepublish"
+    "prepublish": "npm run lint && zent-kit prepublish"
   },
   "author": "who r u",
   "license": "MIT",
