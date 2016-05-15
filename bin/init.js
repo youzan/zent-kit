@@ -20,9 +20,22 @@ module.exports = function(name) {
             .pipe(gulp.dest(path.resolve(projectPath, './' + name)));
     });
 
-    // 修改项目名
-    gulp.task('init:name', function() {
-        logger('----> 重命名');
+    // 单独再导入readme
+    gulp.task('init:readme', function() {
+        logger('----> 生成readme');
+
+        var documentation = fs.readFileSync(path.resolve(__dirname, '../readme.md'));
+        var fileName = path.resolve(projectPath, './' + name + '/readme.md');
+        var file = _.template(fs.readFileSync(fileName))({
+            name: name,
+            documentation: documentation
+        });
+        fs.writeFile(fileName, file);
+    });
+
+    // 单独再导入package.sjon
+    gulp.task('init:package', function() {
+        logger('----> 生成package.json');
 
         var fileName = path.resolve(projectPath, './' + name + '/package.json');
         var file = _.template(fs.readFileSync(fileName))({
@@ -46,5 +59,5 @@ module.exports = function(name) {
         });
     });
 
-    runSequence('copy', 'init:name', 'install');
+    runSequence('copy', 'init:readme', 'init:package', 'install');
 }
