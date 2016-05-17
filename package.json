@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
