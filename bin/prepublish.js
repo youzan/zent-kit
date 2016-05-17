@@ -63,9 +63,9 @@ function getComment(list) {
 
 // 旧文件 删除
 gulp.task('clean', function() {
-    logger('------->   Clean  lib');
+    logger('------->   Clean  lib & dist');
 
-    return gulp.src([paths.lib + '*'], {read: false})
+    return gulp.src([paths.lib + '*', paths.dist + '*'], {read: false})
         .pipe(clean({force: true}));
 });
 
