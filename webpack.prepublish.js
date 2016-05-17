@@ -12,6 +12,9 @@ var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
 var sassArr = [styleLoader, cssLoader, postcssLoader];
 
 module.exports = function(entry, output) {
+    var arr = output.split('/');
+    var lab = arr[arr.length - 3];
+
     var webpackConfig = {
         module: {
             loaders: [
@@ -23,15 +26,23 @@ module.exports = function(entry, output) {
         postcss: function () {
             return [precss, autoprefixer];
         },
-        externals: {
-          "react": "react"
-        },
+        externals: [
+            {
+                react: {
+                  amd: 'react',
+                  root: 'React',
+                  commonjs2: 'react',
+                  commonjs: 'react'
+                }
+            }
+        ],
         entry: [
             entry
         ],
         output: {
           filename: 'main.js',
           path: output,
+          library: lab,
           libraryTarget: 'umd'
         },
         resolve: {
