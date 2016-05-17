@@ -1,21 +1,22 @@
 {
-  "name": "@youzan/zent-seed",
+  "name": "@youzan/<%= name %>",
   "version": "0.0.1",
-  "description": "这是一个react组件",
-  "main": "./lib/Seed.js",
+  "description": "这是一个React组件",
+  "main": "./lib/Index.js",
   "scripts": {
     "dev": "zent-kit dev",
-    "prepublish": "zent-kit prepublish"
+    "lint": "node node_modules/eslint/bin/eslint ./src",
+    "prepublish": "npm run lint && zent-kit prepublish"
   },
   "author": "who r u",
   "license": "MIT",
-  "files": [
-    "assets/",
-    "lib/",
-    "examples/",
-    "src/"
-  ],
   "dependencies": {
     "react": "^15.0.x"
+  },
+  "devDependencies": {
+    "eslint": "^2.8.x",
+    "eslint-config-airbnb": "^7.0.x",
+    "eslint-plugin-jsx-a11y": "^0.6.x",
+    "eslint-plugin-react": "^5.0.x"
   }
 }

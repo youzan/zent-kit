@@ -2,3 +2,5 @@ node_modules
 !scaffold/node_modules
 build
 .tmp
+.DS_Store
+npm-debug.log

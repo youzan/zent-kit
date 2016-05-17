@@ -51,7 +51,11 @@ function getComment(list) {
         var tmp = item.match(/\/\*(.|\s)+?\*\//g);
         if (tmp) {
             result = result.concat(tmp.map(function(value) {
-                return value.slice(2, -2);
+                if (value.match(/^\/\*\*/g)) {
+                    return value.slice(3, -2);
+                } else {
+                    return value.slice(2, -2);
+                }
             }))
         }
     });
@@ -118,7 +122,8 @@ gulp.task('prepare:css', function () {
 var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
 gulp.task('webpack', ['babel'], function(callback) {
     webpack(webpackConfig, function(err, stats) {
-        gutil.log('[webpack]', stats.toString({}));
+        // install、publish都会触发prepublish操作，这里在prepublish不打印明细
+        // gutil.log('[webpack]', stats.toString({}));
         callback();
     });
 });
