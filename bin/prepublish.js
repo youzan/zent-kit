@@ -16,6 +16,8 @@ var gutil = require('gulp-util');
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
 
+var switchUMD = require('./switchUMD');
+
 var projectPath = process.cwd();
 var config = require(`${projectPath}/package.json`);
 var paths = {
@@ -82,14 +84,18 @@ gulp.task('prepare:md', function() {
     fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
 });
 
+//
 gulp.task('prepare:js', ['webpack'], function() {
     logger('-------> Prepare  JS');
-    
-    gulp.src(path.join(paths.dist, '/**/*.js'))
-        .pipe(rename({
-            extname: '.jsx'
-        }))
-        .pipe(gulp.dest(paths.dist));
+
+    var list = fs.readdirSync(paths.dist);
+
+    for (var i = 0, len = list.length; i < len; i++) {
+        if (/\.js$/.test(list[i])) {
+            logger('修改umd头=======>\t' + list[i]);
+            switchUMD(paths.dist + list[i]);
+        }
+    }
 });
 
 // js 转码
