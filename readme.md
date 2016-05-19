@@ -86,6 +86,13 @@ ReactME文件的规范包含：
   "dependencies": {
     "react": "^15.0.x"
   },
+  "files": [
+    "src/",
+    "assets/",
+    "examples/",
+    "lib/",
+    "dist/"
+  ],
   "devDependencies": {
     "eslint": "^2.8.x",
     "eslint-config-airbnb": "^7.0.x",
