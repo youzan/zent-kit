@@ -60,7 +60,6 @@ module.exports = function(name) {
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
             var command = Npath + ' i --registry="http://registry.npm.qima-inc.com" ' + dependencies.join(' ');
-            console.log(command);
             exec(command, {cwd: projectPath + '/' + name}, function(err, stdout, stderr) {
                 logger(stdout + '');
                 logger('----> 初始化完成！')
