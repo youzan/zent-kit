@@ -8,6 +8,8 @@ var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
 // var lessLoader = path.resolve(__dirname, './node_modules/less-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
 
+var externals = require(path.resolve(process.cwd(), './webpack_external'));
+
 // var lessArr = [styleLoader, cssLoader, lessLoader];
 var sassArr = [styleLoader, cssLoader, postcssLoader];
 
@@ -26,17 +28,7 @@ module.exports = function(entry, output) {
         postcss: function () {
             return [precss, autoprefixer];
         },
-        externals: [
-            {
-                'react': {
-                  amd: 'react',
-                  root: 'React',
-                  commonjs2: 'react',
-                  commonjs: 'react'
-                },
-                'react-dom': 'ReactDOM'
-            }
-        ],
+        externals: externals,
         entry: [
             entry
         ],

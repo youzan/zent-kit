@@ -56,7 +56,7 @@ module.exports = function(name) {
     gulp.task('install', function(callback) {
         logger('-------> 安装 依赖....')
 
-        var dependencies = ['react', 'eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react'];
+        var dependencies = ['react', 'eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react', 'babel-eslint'];
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
             var command = Npath + ' i --registry="http://registry.npm.qima-inc.com" ' + dependencies.join(' ');
