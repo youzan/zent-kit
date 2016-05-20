@@ -8,7 +8,27 @@ var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
 // var lessLoader = path.resolve(__dirname, './node_modules/less-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
 
-var externals = require(path.resolve(process.cwd(), './webpack_external'));
+var externals;
+var defaultExternals = [{
+    'react': {
+      amd: 'react',
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react'
+    },
+    'react-dom': 'ReactDOM'
+}];
+
+try {
+    externals = require(path.resolve(process.cwd(), './webpack_external'));
+} catch (ex) {
+    externals = defaultExternals;
+}
+
+if (!externals) {
+    externals = defaultExternals;
+}
+
 
 // var lessArr = [styleLoader, cssLoader, lessLoader];
 var sassArr = [styleLoader, cssLoader, postcssLoader];
