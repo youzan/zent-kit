@@ -91,7 +91,7 @@ gulp.task('prepare:js', ['webpack'], function() {
     var list = fs.readdirSync(paths.dist);
 
     for (var i = 0, len = list.length; i < len; i++) {
-        if (/\.js$/.test(list[i])) {
+        if (/\.js?$/.test(list[i])) {
             logger('修改umd头=======>\t' + list[i]);
             switchUMD(paths.dist + list[i]);
         }
