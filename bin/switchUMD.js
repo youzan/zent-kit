@@ -25,4 +25,9 @@ module.exports = function(pname) {
         dist.write(str);
         index++;
     });
+
+    // 改完之后，写回js
+    lineReader.on('close', function (line) {
+        fs.createReadStream(pname + 'x').pipe(fs.createWriteStream(pname));
+    });
 }

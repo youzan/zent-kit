@@ -7,28 +7,27 @@ var cssLoader = path.resolve(__dirname, './node_modules/css-loader');
 var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
 // var lessLoader = path.resolve(__dirname, './node_modules/less-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
+var urlLoader = path.resolve(__dirname, './node_modules/url-loader');
 
-var externals;
-var defaultExternals = [{
-    'react': {
-      amd: 'react',
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react'
-    },
-    'react-dom': 'ReactDOM'
-}];
+var projectConf;
+
+var defaultConf = {
+    externals: [{
+        'react': {
+          amd: 'react',
+          root: 'React',
+          commonjs2: 'react',
+          commonjs: 'react'
+        },
+        'react-dom': 'ReactDOM'
+    }]
+};
 
 try {
-    externals = require(path.resolve(process.cwd(), './webpack_external'));
+    projectConf = require(path.resolve(process.cwd(), './zent.webpack.config.js'));
 } catch (ex) {
-    externals = defaultExternals;
+    projectConf = defaultConf;
 }
-
-if (!externals) {
-    externals = defaultExternals;
-}
-
 
 // var lessArr = [styleLoader, cssLoader, lessLoader];
 var sassArr = [styleLoader, cssLoader, postcssLoader];
@@ -42,13 +41,13 @@ module.exports = function(entry, output) {
             loaders: [
                 { test: /\.(es6|js|jsx)$/, loader: babelLoader},
                 // { test: /\.less$/, loader: lessArr.join('!')},
+                { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
                 { test: /\.scss$/, loader: sassArr.join('!')}
             ]
         },
         postcss: function () {
             return [precss, autoprefixer];
         },
-        externals: externals,
         entry: [
             entry
         ],
@@ -63,5 +62,5 @@ module.exports = function(entry, output) {
         }
     };
 
-    return webpackConfig;
+    return Object.assign(webpackConfig, projectConf);
 };
