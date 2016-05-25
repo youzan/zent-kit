@@ -3,40 +3,35 @@
 <head>
   <title>Zent Kit - Develop Tools for React</title>
   <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/highlight.css">
   <link rel="stylesheet" href="http://react.fe.qima-inc.com/style/css/index.css">
   <link rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
-<div class="container-fluid">
-      <div class="salt-panel salt-panel-default">
-        <ul class="salt-panel-body list-group demo-header-list row">
-        <% navList.forEach(function(nav) { %>
-          <li class="zol-sm-10 zol-sm-offset-2"><a href=<%- nav %>><%- nav %></a></li>
-        <% }) %>
-        </ul>
-      </div>
-    <div class="row">
+<div>
+  <div class="zent-panel zent-panel-default zent-row" style="border: 0;border-bottom: 1px solid #bbb;margin-bottom: 10px;">
+    <ul class="zent-panel-body list-group demo-header-list zent-col zent-col-24">
+    <% navList.forEach(function(nav) { %>
+      <li class="zent-col zent-col-10 zent-col-offset-2"><a href=<%- nav %>><%- nav %></a></li>
+    <% }) %>
+    </ul>
+  </div>
+    <div class="zent-row">
       <% if(script) { %>
-        <div class="zol-lg-12">
-            <div class="salt-panel salt-panel-default">
-              <div class="salt-panel-body">
-                <div id="react-component-container"></div>
-              </div>
-            </div>
+        <div class="zent-col zent-col-11 zent-col-offset-1">
+            <div id="react-component-container"></div>
             <script>
               window.Component = '<%= script %>';
             </script>
             <script src="/main.js"></script>
         </div>
       <% } %>
-        <div class="<%= script ? 'zol-lg-12' : 'zol-lg-24' %>">
+        <div class="zent-col <%= script ? 'zent-col-12' : 'zent-col-24' %>">
           <% if(readme !== '') { %>
-            <pre><code><%= readme %></code></pre>
+          <div class="wrapper-marked"><%= readme %></div>
           <% } %>
 
           <% if(code) { %>
-            <pre><code><%= code %></code></pre>
+          <pre class="wrapper-marked"><%= code %></pre>
           <% } %>
         </div>
     </div>
