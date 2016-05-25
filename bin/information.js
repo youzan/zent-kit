@@ -16,7 +16,7 @@ module.exports = function(dir) {
         return;
     }
     logger('\nUsage: zent-kit <command> [arguments]');
-    logger('\nCommand:\n');
+    logger('\nCommand:');
     logger('    init <name>     项目初始化');
     logger('    dev             开发者模式');
     logger('    prepublish      发布预处理');
