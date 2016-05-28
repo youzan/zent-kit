@@ -63,69 +63,72 @@ function getComment(list) {
     return result.join('');
 }
 
-// 旧文件 删除
-gulp.task('clean', function() {
-    logger('------->   Clean  lib & dist');
-
-    return gulp.src([paths.lib + '*', paths.dist + '*'], {read: false})
-        .pipe(clean({force: true}));
-});
-
-// readme 制作
-gulp.task('prepare:md', function() {
-    logger('-------> Prepare  README');
-
-    var files = getContent(paths.src);
-    var comments = getComment(files);
-    var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
-            comments: comments
-        }, config));
-
-    fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
-});
-
-//
-gulp.task('prepare:js', ['webpack'], function() {
-    logger('-------> Prepare  JS');
-
-    var list = fs.readdirSync(paths.dist);
-
-    for (var i = 0, len = list.length; i < len; i++) {
-        if (/\.js?$/.test(list[i])) {
-            logger('修改umd头=======>\t' + list[i]);
-            switchUMD(paths.dist + list[i]);
-        }
-    }
-});
-
-// js 转码
-gulp.task('babel', function() {
-    return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
-        .pipe(babel({stage:0}))
-        .pipe(gulp.dest(paths.lib));
-});
-
-// css 转码
-gulp.task('prepare:css', function () {
-    logger('-------> Prepare  CSS');
-
-    var name = config.zent && config.zent.sass ? config.zent.sass : 'index'
-    var cssPath = checkfile('assets/' + name + '.scss');
-    if(cssPath) {
-        var processors = [precss, autoprefixer];
-        gulp.src(cssPath)
-            .pipe(postcss(processors, {syntax: scss}))
-            .pipe(gulp.dest(paths.lib));
-    }
-});
-
 var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
-gulp.task('webpack', ['babel'], function(callback) {
-    webpack(webpackConfig, function(err, stats) {
-        // install、publish都会触发prepublish操作，这里在prepublish不打印明细
-        // gutil.log('[webpack]', stats.toString({}));
-        callback();
-    });
-});
 
-runSequence(['clean', 'prepare:md', 'prepare:css', 'prepare:js']);
+module.exports = function() {
+    // 旧文件 删除
+    gulp.task('clean', function() {
+        gutil.log('------->   Clean  lib & dist');
+
+        return gulp.src([paths.lib + '*', paths.dist + '*'], {read: false})
+            .pipe(clean({force: true}));
+    });
+
+    // readme 制作
+    gulp.task('prepare:md', function() {
+        gutil.log('-------> Prepare  README');
+
+        var files = getContent(paths.src);
+        var comments = getComment(files);
+        var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
+                comments: comments
+            }, config));
+
+        fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
+    });
+
+    //
+    gulp.task('prepare:js', ['webpack'], function() {
+        gutil.log('-------> Prepare  JS');
+
+        var list = fs.readdirSync(paths.dist);
+
+        for (var i = 0, len = list.length; i < len; i++) {
+            if (/\.js?$/.test(list[i])) {
+                logger('修改umd头=======>\t' + list[i]);
+                switchUMD(paths.dist + list[i]);
+            }
+        }
+    });
+
+    // js 转码
+    gulp.task('babel', function() {
+        return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
+            .pipe(babel({stage:0}))
+            .pipe(gulp.dest(paths.lib));
+    });
+
+    // css 转码
+    gulp.task('prepare:css', function () {
+        gutil.log('-------> Prepare  CSS');
+
+        var name = config.zent && config.zent.sass ? config.zent.sass : 'index'
+        var cssPath = checkfile('assets/' + name + '.scss');
+        if(cssPath) {
+            var processors = [precss, autoprefixer];
+            gulp.src(cssPath)
+                .pipe(postcss(processors, {syntax: scss}))
+                .pipe(gulp.dest(paths.lib));
+        }
+    });
+
+    gulp.task('webpack', ['babel'], function(callback) {
+        webpack(webpackConfig, function(err, stats) {
+            // install、publish都会触发prepublish操作，这里在prepublish不打印明细
+            // gutil.log('[webpack]', stats.toString({}));
+            callback();
+        });
+    });
+
+    runSequence(['clean', 'prepare:md', 'prepare:css', 'prepare:js']);
+}

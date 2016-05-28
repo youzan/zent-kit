@@ -5,6 +5,7 @@ var fs = require('fs');
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var _ = require('lodash');
+var gutil = require('gulp-util');
 
 var logger = console.log.bind(console);
 var projectPath = process.cwd();
@@ -14,10 +15,10 @@ module.exports = function(name) {
 
     // 项目规范文件拷贝
     gulp.task('copy', function(callback) {
-        logger('----> 开始初始化')
+        gutil.log(gutil.colors.yellow('----> 开始初始化'));
 
         exec('git clone git@gitlab.qima-inc.com:zent/zent-seed.git ' + name, function(err, stdout, stderr) {
-            logger('-------> 拉取 zent-seed');
+            gutil.log('-------> 拉取 zent-seed');
             exec('rm -rf ./'+ name + '/.git', function(err, stdout, stderr) {
                 callback();
             });
@@ -26,7 +27,7 @@ module.exports = function(name) {
 
     // 单独再导入readme
     gulp.task('init:readme', function(callback) {
-        logger('-------> 生成 readme');
+        gutil.log('-------> 生成 readme');
 
         var documentation = fs.readFileSync(path.resolve(__dirname, '../readme.md'));
         var fileName = path.resolve(projectPath, './' + name + '/readme.md');
@@ -41,7 +42,7 @@ module.exports = function(name) {
 
     // 单独再导入package.sjon
     gulp.task('init:package', function(callback) {
-        logger('-------> 生成 package.json');
+        gutil.log('-------> 生成 package.json');
 
         var fileName = path.resolve(projectPath, './' + name + '/package.json');
         var file = _.template(fs.readFileSync(fileName))({
@@ -54,7 +55,7 @@ module.exports = function(name) {
 
     // 项目依赖安装
     gulp.task('install', function(callback) {
-        logger('-------> 安装 依赖....')
+        gutil.log('-------> 安装 依赖....')
 
         var dependencies = ['react', 'eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react', 'babel-eslint'];
         exec('which npm', function(err, stdout, stderr) {
@@ -62,11 +63,16 @@ module.exports = function(name) {
             var command = Npath + ' i --registry="http://registry.npm.qima-inc.com" ' + dependencies.join(' ');
             exec(command, {cwd: projectPath + '/' + name}, function(err, stdout, stderr) {
                 logger(stdout + '');
-                logger('----> 初始化完成！')
+                gutil.log(gutil.colors.green('----> 初始化完成！'));
                 callback();
             });
         });
     });
 
+
+    if (!name) {
+        logger('   sir: we need a project name');
+        return;
+    }
     runSequence('copy', 'init:readme', 'init:package', 'install');
 }

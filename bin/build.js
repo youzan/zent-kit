@@ -19,30 +19,34 @@ var paths = {
   examples: path.resolve(projectPath, './examples')  // 需要监听的examples文件
 };
 
-gulp.task('index', function() {
-    return gulp.src(paths.index)
-        .pipe(gulp.dest(paths.tmp));
-});
-
-gulp.task('clean', function() {
-    logger('------->   Clean  old examples');
-
-    return gulp.src(paths.tmp + '/*', {read: false})
-        .pipe(clean({force: true}));
-});
-
-gulp.task('link:examples', function() {
-    logger('------->    Read  new examples');
-
-    return gulp.src(paths.examples)
-        .pipe(symlink(paths.tmp + '/examples', {force: true}));
-});
-
 var webpackConfig = require(paths.webpack)(path.join(paths.tmp, 'index.jsx'), path.join(paths.tmp, 'build'));
-gulp.task('webpack', function(callback) {
-    webpack(webpackConfig, function(err, stats) {
-        gutil.log('[webpack]', stats.toString({}));
-    })
-});
 
-runSequence('clean', ['index', 'link:examples'], 'webpack');
+module.exports = function() {
+
+    gulp.task('index', function() {
+        return gulp.src(paths.index)
+            .pipe(gulp.dest(paths.tmp));
+    });
+
+    gulp.task('clean', function() {
+        gutil.log('------->   Clean  old examples');
+
+        return gulp.src(paths.tmp + '/*', {read: false})
+            .pipe(clean({force: true}));
+    });
+
+    gulp.task('link:examples', function() {
+        gutil.log('------->    Read  new examples');
+
+        return gulp.src(paths.examples)
+            .pipe(symlink(paths.tmp + '/examples', {force: true}));
+    });
+
+    gulp.task('webpack', function(callback) {
+        webpack(webpackConfig, function(err, stats) {
+            gutil.log('[webpack]', stats.toString({}));
+        })
+    });
+
+    runSequence('clean', ['index', 'link:examples'], 'webpack');
+};

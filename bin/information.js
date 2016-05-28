@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 var path = require('path');
 var ch = require('child_process');
-var config = require('../package.json');
 var gutil = require('gulp-util');
+var config = require('../package.json');
 var logger = console.log.bind(console);
 
 var loggerVersion = function() {

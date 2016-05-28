@@ -8,6 +8,7 @@ var koastatic = require('koa-static');
 var highlight = require('highlight').Highlight;
 var marked = require('marked');
 var open = require('open');
+var gutil = require('gulp-util');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
@@ -34,7 +35,7 @@ navList.unshift('/readme');
 
 // router: readme
 router.get('/readme', function *(next) {
-    logger('\n-------> GET: readme\n');
+    gutil.log(gutil.colors.blue('-------> GET: readme\n'));
 
     var readmePath = checkfile('readme.md');
     var readme = readmePath ? fs.readFileSync(readmePath, 'utf8') : '';
@@ -50,7 +51,7 @@ router.get('/readme', function *(next) {
 // router: examples
 router.get('/examples/:example', function *(next) {
     var example = this.params.example;
-    logger('\n-------> GET: example %s\n', example);
+    gutil.log(gutil.colors.blue('-------> GET: example', example, '\n'));
 
     var filePath = `${paths.projectPath}/examples/${example}.js`;
     var originFile = fs.readFileSync(filePath, 'utf8');
@@ -95,7 +96,7 @@ var port = (config.zent && config.zent.port) || 7777;
 
 // 项目启动
 app.listen(port);
-logger('-------> Server started on %s', port);
+gutil.log(gutil.colors.blue('------->   Server started on ', port));
 logger('<--------------------------------------------------\n');
 
 // 启动浏览器

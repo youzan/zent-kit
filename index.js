@@ -1,9 +1,12 @@
 #!/usr/bin/env node
+var gutil = require('gulp-util');
+var information = require('./bin/information');
+var logger = console.log.bind(console);
+// 参数
 var args = process.argv.splice(2);
+var operation = args[0];
 var projectDir = process.cwd();
 var kitDir = __dirname;
-var logger = console.log.bind(console);
-var information = require('./bin/information');
 
 logger('-------------------------------------------------->');
 
@@ -13,50 +16,39 @@ if (args.length === 0) {
 }
 
 if (projectDir === kitDir) {
-    logger('-> 请勿在zent-kit目录下运行命令');
+    gutil.log(gutil.colors.red('-> 请勿在zent-kit目录下运行命令\n'));
     return;
 }
 
-var operation = args[0];
 
 switch(operation) {
     case 'init':
-        logger('-> 初始化项目\n');
-
-        if (!args[1]) {
-            logger('   sir: we need a project name');
-            break;
-        }
         var init = require('./bin/init');
+        gutil.log(gutil.colors.green('-> 初始化项目\n'));
         init(args[1]);
-
         break;
+
     case 'dev':
-        logger('-> 开发者模式\n');
-
-        var checkfile = require('./bin/checkfile');
-        if (checkfile('examples')) {
-            require('./bin/server');
-            require('./bin/build');
-        }
-
+        var dev = require('./bin/dev');
+        gutil.log(gutil.colors.green('-> 开发者模式\n'));
+        dev();
         break;
+
     case 'prepublish':
-        logger('-> 发布预处理\n');
-
-        require('./bin/prepublish');
-
+        var pre = require('./bin/prepublish');
+        gutil.log(gutil.colors.green('-> 发布预处理\n'));
+        pre();
         break;
+
     case 'test':
-        logger(projectDir);
-        logger(kitDir);
-
+        logger('    cuttent dir: %s\n        kit dir: %s', projectDir, kitDir);
         break;
+
     case '-v':
     case '--version':
         information('version');
-
         break;
+
     default:
         information(kitDir);
 }
