@@ -26,6 +26,13 @@ module.exports = function(name) {
 
     if (!name) {
         logger('   sir: 重新初始化某个文件，是需要文件名的');
+        logger('        你需要的文件可能在这些之中');
+        logger('            .editorconfig');
+        logger('            .eslintignore');
+        logger('            .eslintrc');
+        logger('            .gitignore');
+        logger('            readme.md');
+        logger('            package.json');
         return;
     }
     runSequence('reset:file');
