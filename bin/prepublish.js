@@ -130,5 +130,5 @@ module.exports = function() {
         });
     });
 
-    runSequence(['clean', 'prepare:md', 'prepare:css', 'prepare:js']);
+    runSequence(['clean', 'prepare:css', 'prepare:js']);
 }

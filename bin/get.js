@@ -8,6 +8,17 @@ var logger = console.log.bind(console);
 var projectPath = process.cwd();
 var exec = ch.exec;
 
+loglist = function() {
+    logger('        你需要的文件可能在下面');
+    logger('            .editorconfig');
+    logger('            .eslintignore');
+    logger('            .eslintrc');
+    logger('            .gitignore');
+    logger('            zent.wepback.config.js');
+    logger('            readme.md');
+    logger('            package.json');
+}
+
 module.exports = function(name) {
 
     // 项目规范文件拷贝
@@ -19,6 +30,7 @@ module.exports = function(name) {
                 gutil.log(gutil.colors.green('----> 重新初始化完成'));
             } else {
                 gutil.log('\n', gutil.colors.red(stderr));
+                loglist();
             }
             callback();
         });
@@ -26,13 +38,7 @@ module.exports = function(name) {
 
     if (!name) {
         logger('   sir: 重新初始化某个文件，是需要文件名的');
-        logger('        你需要的文件可能在这些之中');
-        logger('            .editorconfig');
-        logger('            .eslintignore');
-        logger('            .eslintrc');
-        logger('            .gitignore');
-        logger('            readme.md');
-        logger('            package.json');
+        loglist();
         return;
     }
     runSequence('reset:file');
