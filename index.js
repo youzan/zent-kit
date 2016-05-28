@@ -40,6 +40,12 @@ switch(operation) {
         pre();
         break;
 
+    case 'get':
+        var getter = require('./bin/get');
+        gutil.log(gutil.colors.green('-> 更新文件\n'));
+        getter(args[1]);
+        break;
+
     case 'test':
         logger('    cuttent dir: %s\n        kit dir: %s', projectDir, kitDir);
         break;
