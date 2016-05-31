@@ -43,7 +43,8 @@ switch(operation) {
     case 'get':
         var getter = require('./bin/get');
         gutil.log(gutil.colors.green('-> 更新文件\n'));
-        getter(args[1]);
+        args.shift();
+        getter(args);
         break;
 
     case 'test':
