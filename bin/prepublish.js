@@ -118,6 +118,9 @@ module.exports = function() {
             var processors = [precss, autoprefixer];
             gulp.src(cssPath)
                 .pipe(postcss(processors, {syntax: scss}))
+                .pipe(rename(function(path) {
+                    path.extname = ".css"
+                }))
                 .pipe(gulp.dest(paths.lib));
         }
     });
