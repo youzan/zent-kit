@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var gutil = require('gulp-util');
+
 var information = require('./bin/information');
 var logger = console.log.bind(console);
 // 参数
@@ -43,7 +44,8 @@ switch(operation) {
     case 'get':
         var getter = require('./bin/get');
         gutil.log(gutil.colors.green('-> 更新文件\n'));
-        getter(args[1]);
+        args.shift();
+        getter(args);
         break;
 
     case 'test':

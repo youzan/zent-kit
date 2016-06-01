@@ -25,7 +25,7 @@ module.exports = function(name) {
     gulp.task('reset:file', function(callback) {
         gutil.log(gutil.colors.yellow('----> 正在重新初始化', name));
 
-        exec('git archive --remote=git@gitlab.qima-inc.com:zent/zent-seed.git HEAD ' + name + ' | tar -x', function(err, stdout, stderr) {
+        exec('git archive --remote=git@gitlab.qima-inc.com:zent/zent-seed.git HEAD ' + name.join(' ') + ' | tar -x', function(err, stdout, stderr) {
             if (!stderr) {
                 gutil.log(gutil.colors.green('----> 重新初始化完成'));
             } else {
@@ -36,10 +36,11 @@ module.exports = function(name) {
         });
     });
 
-    if (!name) {
+    if (name.length === 0) {
         logger('   sir: 重新初始化某个文件，是需要文件名的');
         loglist();
         return;
     }
+
     runSequence('reset:file');
 }
