@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var gutil = require('gulp-util');
+
 var information = require('./bin/information');
 var logger = console.log.bind(console);
 // 参数
