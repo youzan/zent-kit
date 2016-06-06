@@ -295,6 +295,8 @@
 .zent-btn:link, .zent-btn:visited, .zent-btn:focus {
 
     color: #333;
+
+    text-decoration: none;
 }
 
 .zent-btn:hover {
@@ -302,6 +304,8 @@
     color: #276ACC;
 
     border-color: #276ACC;
+
+    text-decoration: none;
 }
 
 .zent-btn:active {
@@ -311,6 +315,8 @@
     background: #e5e5e5;
 
     border-color: #bbb;
+
+    text-decoration: none;
 }
 
 .zent-btn.zent-btn-loading {}
@@ -630,7 +636,7 @@
 
 /*状态相关*/
 
-.zent-btn-disabled {
+.zent-btn-disabled, .zent-btn-disabled[disabled] {
 
     color: #bbb;
 
@@ -641,12 +647,12 @@
     cursor: not-allowed;
 }
 
-.zent-btn-disabled:link, .zent-btn-disabled:visited, .zent-btn-disabled:focus {
+.zent-btn-disabled:link, .zent-btn-disabled:visited, .zent-btn-disabled:focus, .zent-btn-disabled[disabled]:link, .zent-btn-disabled[disabled]:visited, .zent-btn-disabled[disabled]:focus {
 
     color: #bbb;
 }
 
-.zent-btn-disabled:hover {
+.zent-btn-disabled:hover, .zent-btn-disabled[disabled]:hover {
 
     color: #bbb;
 
@@ -655,7 +661,7 @@
     border-color: #e5e5e5;
 }
 
-.zent-btn-disabled:active {
+.zent-btn-disabled:active, .zent-btn-disabled[disabled]:active {
 
     color: #bbb;
 
@@ -669,6 +675,8 @@
     position: relative;
 
     color: transparent;
+
+    cursor: not-allowed;
 }
 
 .zent-btn-loading:link, .zent-btn-loading:visited, .zent-btn-loading:focus, .zent-btn-loading:hover, .zent-btn-loading:active {
@@ -707,11 +715,11 @@
 
     -webkit-animation: btn-spin 0.6s linear;
 
-    animation: btn-spin 0.6s linear;
+            animation: btn-spin 0.6s linear;
 
     -webkit-animation-iteration-count: infinite;
 
-    animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes btn-spin {
@@ -720,14 +728,14 @@
 
         -webkit-transform: rotate(0);
 
-        transform: rotate(0);
+                transform: rotate(0);
     }
 
     100% {
 
         -webkit-transform: rotate(360deg);
 
-        transform: rotate(360deg);
+                transform: rotate(360deg);
     }
 }
 
@@ -737,14 +745,14 @@
 
         -webkit-transform: rotate(0);
 
-        transform: rotate(0);
+                transform: rotate(0);
     }
 
     100% {
 
         -webkit-transform: rotate(360deg);
 
-        transform: rotate(360deg);
+                transform: rotate(360deg);
     }
 }
 
@@ -830,13 +838,13 @@
 
     left: 0;
 
-    -webkit-transform: rotate(45deg) translateX(-50%);
+    -webkit-transform: rotate(45deg) translateX(-50%) translateY(-50%);
 
-    transform: rotate(45deg) translateX(-50%);
+            transform: rotate(45deg) translateX(-50%) translateY(-50%);
 
-    -webkit-transform-origin: 0 50%;
+    -webkit-transform-origin: 0 0;
 
-    transform-origin: 0 50%;
+            transform-origin: 0 0;
 }
 
 .zent-popover.right-top .zent-popover-arrow {
@@ -847,14 +855,6 @@
 .zent-popover.right-center .zent-popover-arrow {
 
     top: 50%;
-
-    -webkit-transform: rotate(45deg) translateX(-50%) translateY(-50%);
-
-    transform: rotate(45deg) translateX(-50%) translateY(-50%);
-
-    -webkit-transform-origin: 0 0;
-
-    transform-origin: 0 0;
 }
 
 .zent-popover.right-bottom .zent-popover-arrow {
@@ -871,13 +871,13 @@
 
     right: 0;
 
-    -webkit-transform: rotate(45deg) translateX(50%);
+    -webkit-transform: rotate(45deg) translateX(50%) translateY(-50%);
 
-    transform: rotate(45deg) translateX(50%);
+            transform: rotate(45deg) translateX(50%) translateY(-50%);
 
-    -webkit-transform-origin: 100% 50%;
+    -webkit-transform-origin: 100% 0;
 
-    transform-origin: 100% 50%;
+            transform-origin: 100% 0;
 }
 
 .zent-popover.left-top .zent-popover-arrow {
@@ -888,14 +888,6 @@
 .zent-popover.left-center .zent-popover-arrow {
 
     top: 50%;
-
-    -webkit-transform: rotate(45deg) translateX(50%) translateY(-50%);
-
-    transform: rotate(45deg) translateX(50%) translateY(-50%);
-
-    -webkit-transform-origin: 100% 0;
-
-    transform-origin: 100% 0;
 }
 
 .zent-popover.left-bottom .zent-popover-arrow {
@@ -912,13 +904,13 @@
 
     top: 0;
 
-    -webkit-transform: rotate(45deg) translateY(-50%);
+    -webkit-transform: rotate(45deg) translateX(-50%) translateY(-50%);
 
-    transform: rotate(45deg) translateY(-50%);
+            transform: rotate(45deg) translateX(-50%) translateY(-50%);
 
-    -webkit-transform-origin: 50% 0;
+    -webkit-transform-origin: 0 0;
 
-    transform-origin: 50% 0;
+            transform-origin: 0 0;
 }
 
 .zent-popover.bottom-right .zent-popover-arrow {
@@ -929,14 +921,6 @@
 .zent-popover.bottom-center .zent-popover-arrow {
 
     left: 50%;
-
-    -webkit-transform: rotate(45deg) translateX(-50%) translateY(-50%);
-
-    transform: rotate(45deg) translateX(-50%) translateY(-50%);
-
-    -webkit-transform-origin: 0 0;
-
-    transform-origin: 0 0;
 }
 
 .zent-popover.bottom-left .zent-popover-arrow {
@@ -953,13 +937,13 @@
 
     bottom: 0;
 
-    -webkit-transform: rotate(45deg) translateY(50%);
+    -webkit-transform: rotate(45deg) translateX(-50%) translateY(50%);
 
-    transform: rotate(45deg) translateY(50%);
+            transform: rotate(45deg) translateX(-50%) translateY(50%);
 
-    -webkit-transform-origin: 50% 100%;
+    -webkit-transform-origin: 0 100%;
 
-    transform-origin: 50% 100%;
+            transform-origin: 0 100%;
 }
 
 .zent-popover.top-left .zent-popover-arrow {
@@ -970,14 +954,6 @@
 .zent-popover.top-center .zent-popover-arrow {
 
     left: 50%;
-
-    -webkit-transform: rotate(45deg) translateX(-50%) translateY(50%);
-
-    transform: rotate(45deg) translateX(-50%) translateY(50%);
-
-    -webkit-transform-origin: 0 100%;
-
-    transform-origin: 0 100%;
 }
 
 .zent-popover.top-right .zent-popover-arrow {
@@ -1052,35 +1028,76 @@
     background-color: #ff6666;
 }
 
+/**
+ * zent-breadcrumb:
+ * `.zent-breadcrumb` - 面包屑
+ *
+ *     @example
+ *     <div class="zent-breadcrumb">
+ *         <a href="#">微页面</a>
+ *         <span>发布页面</span>
+ *     </div>
+ *
+ */
+
 .zent-breadcrumb {
 
     color: #333;
 
+    font-size: 0;
+
+    line-height: 0;
+
+    padding: 15px 0;
+}
+
+.zent-breadcrumb span, .zent-breadcrumb a {
+
     font-size: 14px;
+
+    line-height: 1em;
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    text-decoration: none;
+}
+
+.zent-breadcrumb span::after, .zent-breadcrumb a::after {
+
+    content: "/";
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    color: #ccc;
+
+    margin-left: 5px;
+
+    margin-right: 5px;
+}
+
+.zent-breadcrumb span, .zent-breadcrumb a {}
+
+.zent-breadcrumb span:last-child, .zent-breadcrumb a:last-child {}
+
+.zent-breadcrumb span:last-child::after, .zent-breadcrumb a:last-child::after {
+
+    content: "";
+
+    display: none;
+}
+
+.zent-breadcrumb span {
+
+    color: #333;
 }
 
 .zent-breadcrumb a {
 
     color: #0099fc;
-}
-
-.zent-breadcrumb > span:last-child {
-
-    font-weight: bold;
-
-    color: #333;
-}
-
-.zent-breadcrumb > span:last-child .zent-breadcrumb-separator {
-
-    display: none;
-}
-
-.zent-breadcrumb-separator {
-
-    margin: 0 8px;
-
-    color: #ccc;
 }
 
 .zent-dialog {
@@ -1093,7 +1110,7 @@
 
     -webkit-transform: translateX(-50%);
 
-    transform: translateX(-50%);
+            transform: translateX(-50%);
 
     -webkit-transition: top 0.5s;
 
@@ -1320,6 +1337,10 @@ footer {
 
     font-size: 14px;
 }
+.wrapper-left .salt-tree ul li:last-child a span {
+
+    visibility: hidden;
+}
 .wrapper-marked {
 
     margin-bottom: 40px;
@@ -1522,6 +1543,8 @@ footer {
 .example-code pre {
 
     border: 0;
+
+    max-height: 432px;
 }
 .example-arrow {
 
