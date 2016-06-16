@@ -1,5 +1,11 @@
 # Zent Kit to Develop React Component
 
+[![version][version-image]][download-url]
+[![download][download-image]][download-url]
+[version-image]: http://npm.qima-inc.com/badge/v/@youzan/zent-kit.svg?style=flat-square
+[download-image]: http://npm.qima-inc.com/badge/d/@youzan/zent-kit.svg?style=flat-square
+[download-url]: http://npm.qima-inc.com/package/@youzan/zent-kit
+
 ## Install
 
 ```bash
