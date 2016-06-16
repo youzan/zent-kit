@@ -6,8 +6,6 @@
 ynpm install @youzan/zent-kit -g
 ```
 
-## How to use
-
 ### 初始化组件
 
 ```bash
@@ -25,8 +23,6 @@ zent-kit dev
 ```bash
 zent-kit prepublish
 ```
-
-## Documentation
 
 ### File Structure
 
@@ -71,7 +67,7 @@ ReactME文件的规范包含：
 
 ### package.json
 
-如果不适用zent-kit init，自行编写的package.json需参考以下代码
+如果不使用zent-kit init，自行编写的package.json需参考以下代码
 
 ```bash
 {
