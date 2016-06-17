@@ -33,23 +33,7 @@ var navList = files.filter(function (filename) {
     });
 navList.unshift('/readme');
 
-// router: readme
-router.get('/readme', function *(next) {
-    gutil.log(gutil.colors.blue('-------> GET: readme\n'));
-
-    var readmePath = checkfile('readme.md');
-    var readme = readmePath ? fs.readFileSync(readmePath, 'utf8') : '';
-    var data = {
-        navList: navList,
-        script: false,
-        readme: marked(readme),
-        code: false
-    };
-    this.body = _.template(layout)(data);
-});
-
-// router: examples
-router.get('/examples/:example', function *(next) {
+var exportEX = function *(next) {
     var example = this.params.example;
     gutil.log(gutil.colors.blue('-------> GET: example', example, '\n'));
 
@@ -75,7 +59,26 @@ router.get('/examples/:example', function *(next) {
     };
 
     this.body =  _.template(layout)(data);
+}
+
+// router: readme
+router.get('/readme', function *(next) {
+    gutil.log(gutil.colors.blue('-------> GET: readme\n'));
+
+    var readmePath = checkfile('readme.md');
+    var readme = readmePath ? fs.readFileSync(readmePath, 'utf8') : '';
+    var data = {
+        navList: navList,
+        script: false,
+        readme: marked(readme),
+        code: false
+    };
+    this.body = _.template(layout)(data);
 });
+
+// router: examples
+router.get('/examples/:example/*', exportEX);
+router.get('/examples/:example', exportEX);
 
 // redirect
 router.redirect('/', '/readme');

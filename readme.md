@@ -1,12 +1,16 @@
 # Zent Kit to Develop React Component
 
+[![version][version-image]][download-url]
+[![download][download-image]][download-url]
+[version-image]: http://npm.qima-inc.com/badge/v/@youzan/zent-kit.svg?style=flat-square
+[download-image]: http://npm.qima-inc.com/badge/d/@youzan/zent-kit.svg?style=flat-square
+[download-url]: http://npm.qima-inc.com/package/@youzan/zent-kit
+
 ## Install
 
 ```bash
 ynpm install @youzan/zent-kit -g
 ```
-
-## How to use
 
 ### 初始化组件
 
@@ -25,8 +29,6 @@ zent-kit dev
 ```bash
 zent-kit prepublish
 ```
-
-## Documentation
 
 ### File Structure
 
@@ -71,7 +73,7 @@ ReactME文件的规范包含：
 
 ### package.json
 
-如果不适用zent-kit init，自行编写的package.json需参考以下代码
+如果不使用zent-kit init，自行编写的package.json需参考以下代码
 
 ```bash
 {
