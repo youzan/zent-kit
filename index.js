@@ -6,6 +6,7 @@ var logger = console.log.bind(console);
 // 参数
 var args = process.argv.splice(2);
 var operation = args[0];
+var otherParams = args.slice(1).join(' ');
 var projectDir = process.cwd();
 var kitDir = __dirname;
 
@@ -48,8 +49,13 @@ switch(operation) {
         getter(args);
         break;
 
-    case 'test':
+    case 'pwd':
         logger('    cuttent dir: %s\n        kit dir: %s', projectDir, kitDir);
+        break;
+
+    case 'test':
+        var test = require('./bin/test');
+        test(otherParams);
         break;
 
     case '-v':

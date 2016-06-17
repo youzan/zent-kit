@@ -60,7 +60,7 @@ module.exports = function(name) {
         var dependencies = ['react@15.0.2', 'eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react', 'babel-eslint'];
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
-            var command = Npath + ' i --registry="http://registry.npm.qima-inc.com" ' + dependencies.join(' ');
+            var command = Npath + ' i --registry="http://registry.npm.qima-inc.com"';
             exec(command, {cwd: projectPath + '/' + name}, function(err, stdout, stderr) {
                 logger(stdout + '');
                 gutil.log(gutil.colors.green('----> 初始化完成！'));
