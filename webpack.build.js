@@ -21,7 +21,7 @@ module.exports = function(entry, output) {
                 { test: /\.(es6|js|jsx)$/, loader: babelLoader},
                 { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
                 // { test: /\.less$/, loader: lessArr.join('!')},
-                { test: /\.scss$/, loader: sassArr.join('!')}
+                { test: /\.(css|scss)$/, loader: sassArr.join('!')}
             ]
         },
         postcss: function () {
