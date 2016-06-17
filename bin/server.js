@@ -77,7 +77,7 @@ router.get('/readme', function *(next) {
 });
 
 // router: examples
-router.get('/examples/:example/:sub', exportEX);
+router.get('/examples/:example/*', exportEX);
 router.get('/examples/:example', exportEX);
 
 // redirect
