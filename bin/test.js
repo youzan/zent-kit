@@ -6,9 +6,5 @@ module.exports = function(params) {
 
 	var p = path.resolve(__dirname, '../node_modules/jest/bin/jest.js');
 
-	var jest = spawn(p, params.split(' '));
-
-	jest.stdout.on('data', function(data) {
-		console.log(data + '');
-	});
+	var jest = spawn(p, params.split(' '), {stdio: 'inherit'});
 };
