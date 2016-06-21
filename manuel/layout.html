@@ -7,33 +7,31 @@
   <link rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
-<div>
-  <div class="zent-panel zent-panel-default zent-row demo-wrapper">
+<div class="zent-panel zent-panel-default zent-row demo-wrapper">
     <ul class="zent-panel-body list-group demo-header-list zent-col zent-col-24">
-    <% navList.forEach(function(nav) { %>
-      <li class="zent-col zent-col-10 zent-col-offset-2"><a href=<%- nav %>><%- nav %></a></li>
-    <% }) %>
+        <% navList.forEach(function(nav) { %>
+        <li class="zent-col zent-col-10 zent-col-offset-2"><a href=<%- nav %>><%- nav %></a></li>
+        <% }) %>
     </ul>
-  </div>
-    <div class="zent-row">
-      <% if(script) { %>
-        <div class="zent-col zent-col-11 zent-col-offset-1">
-            <div id="react-component-container"></div>
-            <script>
-              window.Component = '<%= script %>';
-            </script>
-            <script src="/main.js"></script>
-        </div>
-      <% } %>
-        <div class="zent-col <%= script ? 'zent-col-12' : 'zent-col-24' %>">
-          <% if(readme !== '') { %>
-          <div class="wrapper-marked"><%= readme %></div>
-          <% } %>
+</div>
+<div class="zent-row">
+    <% if(script) { %>
+    <div class="zent-col zent-col-11 zent-col-offset-1">
+        <div id="react-component-container"></div>
+        <script>
+          window.Component = '<%= script %>';
+        </script>
+        <script src="/main.js"></script>
+    </div>
+    <% } %>
+    <div class="zent-col <%= script ? 'zent-col-12' : 'zent-col-24' %>">
+        <% if(readme !== '') { %>
+        <div class="wrapper-marked"><%= readme %></div>
+        <% } %>
 
-          <% if(code) { %>
-          <pre class="wrapper-marked"><%= code %></pre>
-          <% } %>
-        </div>
+        <% if(code) { %>
+        <pre class="wrapper-marked"><%= code %></pre>
+        <% } %>
     </div>
 </div>
 <script src="http://127.0.0.1:35729/livereload.js"></script>
