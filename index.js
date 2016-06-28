@@ -5,14 +5,13 @@ var information = require('./bin/information');
 var logger = console.log.bind(console);
 // 参数
 var args = process.argv.splice(2);
-var operation = args[0];
-var otherParams = args.slice(1).join(' ');
+var operation = args.shift();
 var projectDir = process.cwd();
 var kitDir = __dirname;
 
 logger('-------------------------------------------------->');
 
-if (args.length === 0) {
+if (!operation) {
     information(kitDir);
     return;
 }
@@ -27,7 +26,7 @@ switch(operation) {
     case 'init':
         var init = require('./bin/init');
         gutil.log(gutil.colors.green('-> 初始化项目\n'));
-        init(args[1]);
+        init(args[0]);
         break;
 
     case 'dev':
@@ -45,17 +44,16 @@ switch(operation) {
     case 'get':
         var getter = require('./bin/get');
         gutil.log(gutil.colors.green('-> 更新文件\n'));
-        args.shift();
         getter(args);
         break;
 
     case 'pwd':
-        logger('    cuttent dir: %s\n        kit dir: %s', projectDir, kitDir);
+        logger('    current dir: %s\n        kit dir: %s', projectDir, kitDir);
         break;
 
     case 'test':
         var test = require('./bin/test');
-        test(otherParams);
+        test(args.join(' '));
         break;
 
     case '-v':

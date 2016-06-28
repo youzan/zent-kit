@@ -32,7 +32,8 @@ module.exports = function(dir) {
     logger('    init <name>     项目初始化');
     logger('    dev             开发者模式');
     logger('    prepublish      发布预处理');
-    logger('    get <name>      重获某个基础文件');
+    logger('    get [names]     重获某个基础文件');
+    logger('    pwd             查看使用中的 zent-kit 路径');
     logger('    -v, --version   查看kit版本\n');
     loggerVersion();
     logger('    from            %s\n', dir);
