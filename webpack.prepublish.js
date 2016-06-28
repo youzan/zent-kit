@@ -5,7 +5,6 @@ var autoprefixer = require('autoprefixer');
 var babelLoader = path.resolve(__dirname, './node_modules/babel-loader') + '?stage=0';
 var cssLoader = path.resolve(__dirname, './node_modules/css-loader');
 var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
-// var lessLoader = path.resolve(__dirname, './node_modules/less-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
 var urlLoader = path.resolve(__dirname, './node_modules/url-loader');
 
@@ -29,7 +28,6 @@ try {
     projectConf = defaultConf;
 }
 
-// var lessArr = [styleLoader, cssLoader, lessLoader];
 var sassArr = [styleLoader, cssLoader, postcssLoader];
 
 module.exports = function(entry, output) {
@@ -39,8 +37,7 @@ module.exports = function(entry, output) {
     var webpackConfig = {
         module: {
             loaders: [
-                { test: /\.(es6|js|jsx)$/, loader: babelLoader},
-                // { test: /\.less$/, loader: lessArr.join('!')},
+                { test: /\.(es6|js|jsx)$/, babelrc: false, babloader: babelLoader},
                 { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
                 { test: /\.scss$/, loader: sassArr.join('!')}
             ]
