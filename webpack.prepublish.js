@@ -37,7 +37,7 @@ module.exports = function(entry, output) {
     var webpackConfig = {
         module: {
             loaders: [
-                { test: /\.(es6|js|jsx)$/, babelrc: false, babloader: babelLoader},
+                { test: /\.(es6|js|jsx)$/, babelrc: false, loader: babelLoader},
                 { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
                 { test: /\.scss$/, loader: sassArr.join('!')}
             ]
