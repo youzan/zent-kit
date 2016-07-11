@@ -3,7 +3,7 @@ var path = require('path');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
-var babelLoader = path.resolve(__dirname, './node_modules/babel-loader') + '?stage=0';
+var babelLoader = path.resolve(__dirname, './node_modules/babel-loader');
 var cssLoader = path.resolve(__dirname, './node_modules/css-loader');
 var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
@@ -16,7 +16,12 @@ module.exports = function(entry, output) {
         watch: true,
         module: {
             loaders: [
-                { test: /\.(es6|js|jsx)$/, loader: babelLoader},
+                {
+                    test: /\.(es6|js|jsx)$/, loader: babelLoader,
+                    query: {
+                        presets: ['es2015', 'react', 'stage-0']
+                    }
+                },
                 { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
                 { test: /\.(css|scss)$/, loader: sassArr.join('!')}
             ]

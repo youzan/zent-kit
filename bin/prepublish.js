@@ -103,8 +103,11 @@ module.exports = function() {
 
     // js 转码
     gulp.task('babel', function() {
+        // 此处有一个瑕疵，这几个 presets  既安装在 zent-kit 这边，又在组件那边安装了，重复
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
-            .pipe(babel({stage:0}))
+            .pipe(babel({
+                'presets': ['es2015', 'react', 'stage-0']
+            }))
             .pipe(gulp.dest(paths.lib));
     });
 
