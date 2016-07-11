@@ -13,7 +13,7 @@ var logger = console.log.bind(console);
 var projectPath = process.cwd();    // 执行命令所在目录
 
 var paths = {
-  webpack: path.resolve(__dirname, '../webpack.build.js'),   // webpack
+  webpack: path.resolve(__dirname, '../webpack/webpack.build.js'),   // webpack
   index: path.resolve(__dirname, '../manuel/index.jsx'),  // index源文件
   tmp: path.resolve(__dirname, '../.tmp'),    // 拷贝临时目录
   examples: path.resolve(projectPath, './examples')  // 需要监听的examples文件

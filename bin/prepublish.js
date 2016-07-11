@@ -26,7 +26,7 @@ var paths = {
         lib: path.join(projectPath, '/lib/'),
         dist: path.join(projectPath, '/dist/'),
         index: path.join(projectPath, '/src/Index'),
-        webpack: path.resolve(__dirname, '../webpack.prepublish.js'),   // webpack
+        webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),   // webpack
         readmeSrc: path.join(__dirname, '../manuel/readme.md')    // 项目readme的源文件
     };
 
