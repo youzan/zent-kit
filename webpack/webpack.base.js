@@ -17,7 +17,7 @@ module.exports = function(entry, output) {
                 {
                     test: /\.(es6|js|jsx)$/, loader: babelLoader,
                     query: {
-                        presets: ['es2015', 'react', 'stage-0']
+                        presets: ['es2015', 'react', 'stage-1']
                     }
                 },
                 { test: /\.(png|jpg|jpeg)$/, loader: urlLoader},
