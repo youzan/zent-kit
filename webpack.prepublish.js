@@ -18,7 +18,12 @@ var defaultConf = {
           commonjs2: 'react',
           commonjs: 'react'
         },
-        'react-dom': 'ReactDOM'
+		'react-dom': {
+          amd: 'react-dom',
+          root: 'ReactDOM',
+          commonjs2: 'react-dom',
+          commonjs: 'react-dom'
+        },
     }]
 };
 
