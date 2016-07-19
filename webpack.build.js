@@ -8,6 +8,7 @@ var cssLoader = path.resolve(__dirname, './node_modules/css-loader');
 var styleLoader = path.resolve(__dirname, './node_modules/style-loader');
 var postcssLoader = path.resolve(__dirname, './node_modules/postcss-loader');
 var urlLoader = path.resolve(__dirname, './node_modules/url-loader');
+var postcssImport = require('postcss-import');
 
 var sassArr = [styleLoader, cssLoader, postcssLoader];
 
@@ -21,9 +22,13 @@ module.exports = function(entry, output) {
                 { test: /\.(css|scss)$/, loader: sassArr.join('!')}
             ]
         },
-        postcss: function () {
-            return [precss, autoprefixer];
-        },
+		postcss: function(webpack) {
+	        return [
+	            postcssImport({ addDependencyTo: webpack }), // Must be first item in list
+				precss,
+	            autoprefixer,
+	        ];
+	    },
         entry: [
             entry
         ],

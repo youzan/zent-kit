@@ -42,8 +42,12 @@ module.exports = function(entry, output) {
                 { test: /\.scss$/, loader: sassArr.join('!')}
             ]
         },
-        postcss: function () {
-            return [precss, autoprefixer];
+        postcss: function(webpack) {
+			console.log(webpack);
+            return [
+				precss,
+				autoprefixer
+			 ];
         },
         entry: [
             entry
