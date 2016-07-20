@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>Zent Kit - Develop Tools for React</title>
-  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/react-zent-ui.css">
   <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/highlight.js/styles/github.css">
+  <link rel="stylesheet" href="/primer-markdown/build/build.css">
 </head>
 <body>
 <div class="zent-panel zent-panel-default zent-row demo-wrapper">
@@ -28,17 +29,15 @@
         <script src="/main.js"></script>
     </div>
     <% } %>
-    <div class="zent-col <%= script ? 'zent-col-12' : 'zent-col-offset-1 zent-col-22' %>">
+    <div class="zent-col <%= script ? 'zent-col-11' : 'zent-col-offset-1 zent-col-22' %>">
         <% if(readme !== '') { %>
-        <div class="wrapper-marked">
+        <div class="markdown-body">
             <%= readme %>
         </div>
         <% } %>
 
         <% if(code) { %>
-        <pre class="wrapper-marked">
-            <%= code %>
-        </pre>
+        <pre class="src-container"><%= code %></pre>
         <% } %>
     </div>
 </div>

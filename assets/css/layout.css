@@ -1,6 +1,28 @@
-html {font-size: 50px !important;}
-body {padding: 10px 0;}
-.logo {position:fixed; top: 0; right: 0; display: block; margin: 0.1rem;}
-.logo img {width: 0.8rem;}
-.demo-wrapper {border: 0;border-bottom: 1px solid #bbb;margin-bottom: 10px;}
-.demo-header-list {list-style-position: inside; list-style-type: katakana; font-size: .3rem; margin-bottom: 10px;}
+.demo-wrapper {
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 10px;
+}
+
+.demo-header-list {
+  padding: 0 !important;
+  list-style-position: inside;
+  list-style-type: upper-roman;
+  margin-bottom: 10px;
+}
+
+.demo-header-list li {
+  margin-top: 5px;
+}
+
+.markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.src-container {
+  overflow: scroll;
+  border: 1px solid #ececec;
+  padding: 16px;
+  border-radius: 4px;
+}
