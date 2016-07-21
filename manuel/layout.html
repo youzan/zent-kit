@@ -2,45 +2,44 @@
 <html>
 <head>
   <title>Zent Kit - Develop Tools for React</title>
-  <link rel="stylesheet" href="/css/react-zent-ui.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/highlight.js/styles/github.css">
   <link rel="stylesheet" href="/primer-markdown/build/build.css">
 </head>
 <body>
-<div class="zent-panel zent-panel-default zent-row demo-wrapper">
-    <ul class="zent-panel-body list-group demo-header-list zent-col zent-col-24">
+  <div class="dev-container">
+    <ul class="demo-header-list clearfix">
         <% navList.forEach(function(nav) { %>
-        <li class="zent-col zent-col-10 zent-col-offset-2">
+        <li class="demo-item">
             <a href=<%- nav %>>
                 <%- nav %>
             </a>
         </li>
         <% }) %>
     </ul>
-</div>
-<div class="zent-row">
-    <% if(script) { %>
-    <div class="zent-col zent-col-11 zent-col-offset-1">
-        <div id="react-component-container"></div>
-        <script>
-            window.Component = '<%= script %>';
-        </script>
-        <script src="/main.js"></script>
-    </div>
-    <% } %>
-    <div class="zent-col <%= script ? 'zent-col-11' : 'zent-col-offset-1 zent-col-22' %>">
-        <% if(readme !== '') { %>
-        <div class="markdown-body">
-            <%= readme %>
+    <div class="demo-content">
+        <% if(script) { %>
+        <div class="demo-runner">
+            <div id="react-component-container"></div>
+            <script>
+                window.Component = '<%= script %>';
+            </script>
+            <script src="/main.js"></script>
         </div>
         <% } %>
+        <div class="demo-src">
+            <% if(readme !== '') { %>
+            <div class="markdown-body">
+                <%= readme %>
+            </div>
+            <% } %>
 
-        <% if(code) { %>
-        <pre class="src-container"><%= code %></pre>
-        <% } %>
+            <% if(code) { %>
+            <pre class="src-body"><%= code %></pre>
+            <% } %>
+        </div>
     </div>
-</div>
+  </div>
 <script src="http://127.0.0.1:35729/livereload.js"></script>
 </body>
 </html>
