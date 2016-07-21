@@ -25,8 +25,8 @@ var paths = {
         src: path.join(projectPath, '/src'),
         lib: path.join(projectPath, '/lib/'),
         dist: path.join(projectPath, '/dist/'),
-        index: path.join(projectPath, '/src/Index'),
-        webpack: path.resolve(__dirname, '../webpack.prepublish.js'),   // webpack
+        index: path.join(projectPath, '/src/index'),
+        webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),   // webpack
         readmeSrc: path.join(__dirname, '../manuel/readme.md')    // 项目readme的源文件
     };
 
@@ -103,8 +103,12 @@ module.exports = function() {
 
     // js 转码
     gulp.task('babel', function() {
+        // 此处有一个瑕疵，这几个 presets  既安装在 zent-kit 这边，又在组件那边安装了，重复
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
-            .pipe(babel({stage:0}))
+            .pipe(babel({
+                'presets': ['es2015', 'react', 'stage-1'],
+                'plugins': ['add-module-exports']
+            }))
             .pipe(gulp.dest(paths.lib));
     });
 

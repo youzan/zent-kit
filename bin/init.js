@@ -57,7 +57,6 @@ module.exports = function(name) {
     gulp.task('install', function(callback) {
         gutil.log('-------> 安装 依赖....')
 
-        var dependencies = ['react@15.0.2', 'eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react', 'babel-eslint'];
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
             var command = Npath + ' i --registry="http://registry.npm.qima-inc.com"';
