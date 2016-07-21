@@ -32,6 +32,8 @@ body {
 .demo-runner {
   float: left;
   width: 50%;
+  padding-right: 16px;
+  box-sizing: border-box;
 }
 
 .demo-src {
