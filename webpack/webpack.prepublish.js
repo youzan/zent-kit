@@ -1,28 +1,28 @@
-var projectConf;
-
-var defaultConf = {
-    externals: [{
-        'react': {
-          amd: 'react',
-          root: 'React',
-          commonjs2: 'react',
-          commonjs: 'react'
-        },
-        'react-dom': {
-          amd: 'react-dom',
-          root: 'ReactDOM',
-          commonjs2: 'react-dom',
-          commonjs: 'react-dom'
-        }
-    }]
-};
-
-try {
-    projectConf = require(path.resolve(process.cwd(), './zent.webpack.config.js'));
-} catch (ex) {
-    projectConf = defaultConf;
-}
-
+// var projectConf;
+//
+// var defaultConf = {
+//     externals: [{
+//         'react': {
+//           amd: 'react',
+//           root: 'React',
+//           commonjs2: 'react',
+//           commonjs: 'react'
+//         },
+//         'react-dom': {
+//           amd: 'react-dom',
+//           root: 'ReactDOM',
+//           commonjs2: 'react-dom',
+//           commonjs: 'react-dom'
+//         }
+//     }]
+// };
+//
+// try {
+//     projectConf = require(path.resolve(process.cwd(), './zent.webpack.config.js'));
+// } catch (ex) {
+//     projectConf = defaultConf;
+// }
+//
 module.exports = function(entry, output) {
     var arr = output.split('/');
     var lab = arr[arr.length - 3];
@@ -37,5 +37,5 @@ module.exports = function(entry, output) {
         }
     };
 
-    return Object.assign(webpackBase, webpackConfig, projectConf);
+    return Object.assign({}, webpackBase, webpackConfig, {});
 };
