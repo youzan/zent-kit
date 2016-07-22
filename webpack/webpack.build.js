@@ -1,39 +1,22 @@
-// var LiveReloadPlugin = require('webpack-livereload-plugin');
-// var precss = require('precss');
-// var autoprefixer = require('autoprefixer');
-// var postcssImport = require('postcss-import');
-
-// module.exports = function(entry, output) {
-//     var webpackBase = require('./webpack.base.js')(entry, output);
-//     var webpackConfig = {
-//         watch: true,
-//         devtool: 'source-map',
-//         postcss: function (webpack) {
-//             return [
-// 				postcssImport({ addDependencyTo: webpack }),
-// 				precss,
-// 				autoprefixer
-// 			];
-//         },
-//         plugins:[new LiveReloadPlugin()]
-//     };
-//
-//     return Object.assign({}, webpackBase, webpackConfig);
-// };
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
+var postcssImport = require('postcss-import');
 
 module.exports = function(entry, output) {
-    var arr = output.split('/');
-    var lab = arr[arr.length - 3];
     var webpackBase = require('./webpack.base.js')(entry, output);
-
     var webpackConfig = {
-        output: {
-          filename: 'main.js',
-          path: output,
-          library: lab,
-          libraryTarget: 'umd'
-        }
+        watch: true,
+        // devtool: 'source-map', // 暂时关闭，新创建的组件会有编译的问题
+        postcss: function (webpack) {
+            return [
+				postcssImport({ addDependencyTo: webpack }),
+				precss,
+				autoprefixer
+			];
+        },
+        plugins:[new LiveReloadPlugin()]
     };
 
-    return Object.assign({}, webpackBase, webpackConfig, {});
+    return Object.assign({}, webpackBase, webpackConfig);
 };

@@ -48,7 +48,7 @@ module.exports = function() {
 
         return gulp.src(paths.assets)
             .pipe(symlink(paths.tmp + '/assets', {force: true}));
-		
+
 		// console.log(paths.assets);
 		// console.log(paths.tmp + '/assets');
     });

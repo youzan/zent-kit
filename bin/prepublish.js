@@ -103,11 +103,20 @@ module.exports = function() {
 
     // js 转码
     gulp.task('babel', function() {
+
+		var __path = function(item) {
+		    return path.resolve(__dirname, '../node_modules', item);
+		}
+		var add_module_exports = __path('babel-plugin-add-module-exports');
+		var transform_decorators_legacy = __path('babel-plugin-transform-decorators-legacy');
+		var es2015 = __path('babel-preset-es2015');
+		var react = __path('babel-preset-react');
+		var stage_1 = __path('babel-preset-stage-1');
         // 此处有一个瑕疵，这几个 presets  既安装在 zent-kit 这边，又在组件那边安装了，重复
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
             .pipe(babel({
-                'presets': ['es2015', 'react', 'stage-1'],
-                'plugins': ['add-module-exports']
+                presets: [es2015, react, stage_1],
+                plugins: [add_module_exports, transform_decorators_legacy]
             }))
             .pipe(gulp.dest(paths.lib));
     });
