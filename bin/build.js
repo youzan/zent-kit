@@ -16,6 +16,7 @@ var paths = {
   webpack: path.resolve(__dirname, '../webpack/webpack.build.js'),   // webpack
   index: path.resolve(__dirname, '../manuel/index.jsx'),  // index源文件
   tmp: path.resolve(__dirname, '../.tmp'),    // 拷贝临时目录
+  assets: path.resolve(projectPath, './assets'),  // 需要监听的examples文件
   examples: path.resolve(projectPath, './examples')  // 需要监听的examples文件
 };
 
@@ -40,6 +41,16 @@ module.exports = function() {
 
         return gulp.src(paths.examples)
             .pipe(symlink(paths.tmp + '/examples', {force: true}));
+    });
+
+    gulp.task('link:assets', function() {
+        gutil.log('------->    Read  new assets');
+
+        return gulp.src(paths.assets)
+            .pipe(symlink(paths.tmp + '/assets', {force: true}));
+		
+		// console.log(paths.assets);
+		// console.log(paths.tmp + '/assets');
     });
 
     gulp.task('webpack', function(callback) {

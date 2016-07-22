@@ -1,4 +1,5 @@
 var projectConf;
+
 var defaultConf = {
     externals: [{
         'react': {

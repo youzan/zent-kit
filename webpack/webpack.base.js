@@ -1,10 +1,7 @@
 var path = require('path');
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
-
 var __path = function(item) {
-        return path.resolve(__dirname, '../node_modules', item);
-    }
+    return path.resolve(__dirname, '../node_modules', item);
+}
 
 var babelLoader = __path('babel-loader');
 var cssLoader = __path('css-loader');
