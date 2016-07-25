@@ -45,7 +45,7 @@ module.exports = function(entry, output) {
           path: output
         },
         resolve: {
-          extensions: ['', '.js', '.jsx'],
+          extensions: ['', '.js', '.jsx', '.css', 'scss'],
         }
     };
 
