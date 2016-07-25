@@ -16,6 +16,8 @@ var react = __path('babel-preset-react');
 var stage_1 = __path('babel-preset-stage-1');
 
 var sassArr = [styleLoader, cssLoader, postcssLoader];
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 module.exports = function(entry, output) {
     var webpackConfig = {
@@ -43,7 +45,7 @@ module.exports = function(entry, output) {
           path: output
         },
         resolve: {
-          extensions: ['', '.js', '.jsx'],
+          extensions: ['', '.js', '.jsx', '.css', 'scss'],
         }
     };
 

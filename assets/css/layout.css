@@ -1,6 +1,54 @@
-html {font-size: 50px !important;}
-body {padding: 10px 0;}
-.logo {position:fixed; top: 0; right: 0; display: block; margin: 0.1rem;}
-.logo img {width: 0.8rem;}
-.demo-wrapper {border: 0;border-bottom: 1px solid #bbb;margin-bottom: 10px;}
-.demo-header-list {list-style-position: inside; list-style-type: katakana; font-size: .3rem; margin-bottom: 10px;}
+body {
+  margin: 0;
+}
+
+.clearfix {
+  zoom: 1;
+  overflow: auto;
+}
+
+.dev-container {
+  padding: 32px;
+}
+
+.demo-header-list {
+  padding: 0 0 16px;
+  list-style-position: inside;
+  list-style-type: upper-roman;
+  margin: 0 0 32px;
+  border-bottom: 1px solid #ececec;
+}
+
+.demo-header-list li {
+  float: left;
+  width: 25%;
+  margin-top: 10px
+}
+
+.demo-header-list li:nth-child(-n+4) {
+  margin-top: 0;
+}
+
+.demo-runner {
+  float: left;
+  width: 50%;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.demo-src {
+  overflow: hidden;
+}
+
+.markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.src-body {
+  overflow: scroll;
+  border: 1px solid #ececec;
+  padding: 16px;
+  margin: 0;
+  border-radius: 4px;
+}

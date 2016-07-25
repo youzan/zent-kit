@@ -7,7 +7,7 @@ module.exports = function(entry, output) {
     var webpackBase = require('./webpack.base.js')(entry, output);
     var webpackConfig = {
         watch: true,
-        devtool: 'source-map',
+        // devtool: 'source-map', // 暂时关闭，新创建的组件会有编译的问题
         postcss: function (webpack) {
             return [
 				postcssImport({ addDependencyTo: webpack }),

@@ -1,4 +1,5 @@
 var projectConf;
+
 var defaultConf = {
     externals: [{
         'react': {
@@ -36,5 +37,5 @@ module.exports = function(entry, output) {
         }
     };
 
-    return Object.assign(webpackBase, webpackConfig, projectConf);
+    return Object.assign({}, webpackBase, webpackConfig, projectConf);
 };

@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.2.26",
+  "version": "0.2.27",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-sym": "0.0.14",
     "gulp-util": "^3.0.7",
-    "highlight": "^0.2.4",
+    "highlight.js": "^9.5.0",
     "jest": "^12.1.1",
     "koa": "^1.2.0",
     "koa-router": "^5.4.0",
@@ -52,6 +52,7 @@
     "postcss-loader": "^0.9.1",
     "postcss-scss": "^0.1.7",
     "precss": "^1.4.0",
+    "primer-markdown": "^3.2.0",
     "react": "15.0.2",
     "react-addons-perf": "^15.2.1",
     "react-dom": "15.0.2",
