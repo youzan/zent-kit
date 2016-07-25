@@ -9,8 +9,12 @@ module.exports = function(entry, output) {
         watch: true,
         // devtool: 'source-map', // 暂时关闭，新创建的组件会有编译的问题
         postcss: function (webpack) {
-            return [
-				postcssImport({ addDependencyTo: webpack }),
+			return [
+				postcssImport({
+					onImport: function (files) {
+				        files.forEach(this.addDependency)
+					}.bind(webpack),
+				}),
 				precss,
 				autoprefixer
 			];

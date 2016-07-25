@@ -35,7 +35,10 @@ module.exports = function(entry, output) {
             ]
         },
         postcss: function () {
-            return [precss, autoprefixer];
+            return [
+				precss,
+				autoprefixer
+			];
         },
         entry: [
             entry
@@ -45,7 +48,7 @@ module.exports = function(entry, output) {
           path: output
         },
         resolve: {
-          extensions: ['', '.js', '.jsx', '.css', 'scss'],
+          extensions: ['', '.js', '.jsx'],
         }
     };
 
