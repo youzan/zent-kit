@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.2.27",
+  "version": "0.2.30",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "author": "zhangmengxuan",
   "license": "ISC",
   "dependencies": {
+    "@youzan/postcss-import": "8.1.2",
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
     "babel-core": "^6.10.4",
@@ -48,7 +49,6 @@
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "open": "0.0.5",
-    "postcss-import": "^7.1.3",
     "postcss-loader": "^0.9.1",
     "postcss-scss": "^0.1.7",
     "precss": "^1.4.0",
