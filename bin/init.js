@@ -19,7 +19,7 @@ module.exports = function(name) {
 
         exec('git clone git@gitlab.qima-inc.com:zent/zent-seed.git ' + name, function(err, stdout, stderr) {
             gutil.log('-------> 拉取 zent-seed');
-            exec('rm -rf ./'+ name + '/.git', function(err, stdout, stderr) {
+            exec('rm -rf ./' + name + '/.git', function(err, stdout, stderr) {
                 callback();
             });
         });
@@ -55,7 +55,7 @@ module.exports = function(name) {
 
     // 项目依赖安装
     gulp.task('install', function(callback) {
-        gutil.log('-------> 安装 依赖....')
+        gutil.log('-------> 安装 依赖....');
 
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
@@ -74,4 +74,4 @@ module.exports = function(name) {
         return;
     }
     runSequence('copy', 'init:readme', 'init:package', 'install');
-}
+};

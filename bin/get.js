@@ -5,10 +5,10 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 var logger = console.log.bind(console);
-var projectPath = process.cwd();
+// var projectPath = process.cwd();
 var exec = ch.exec;
 
-loglist = function() {
+var loglist = function() {
     logger('        你需要的文件可能在下面');
     logger('            .editorconfig');
     logger('            .eslintignore');
@@ -17,7 +17,7 @@ loglist = function() {
     logger('            zent.wepback.config.js');
     logger('            readme.md');
     logger('            package.json');
-}
+};
 
 module.exports = function(name) {
 
@@ -43,4 +43,4 @@ module.exports = function(name) {
     }
 
     runSequence('reset:file');
-}
+};

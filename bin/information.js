@@ -1,24 +1,23 @@
 #!/usr/bin/env node
-var path = require('path');
 var ch = require('child_process');
 var gutil = require('gulp-util');
 var config = require('../package.json');
 var logger = console.log.bind(console);
 
 var loggerVersion = function() {
-    logger('Using %s@%s', config.name, config.version)
-}
+    logger('Using %s@%s', config.name, config.version);
+};
 
 var logRepeat = function(func, version, time) {
-    while(version > 0) {
+    while (version > 0) {
         var t = time;
-        while(t > 0) {
+        while (t > 0) {
             func();
-            t --;
+            t--;
         }
-        version --;
+        version--;
     }
-}
+};
 
 var exec = ch.exec;
 
@@ -62,6 +61,6 @@ module.exports = function(dir) {
                     gutil.log(gutil.colors.yellow('~ ~ ~：') + gutil.colors.green('当前版本已经严重落后，请尽快升级'));
                 }, versionM, 5);
             }
-        })
+        });
     });
-}
+};

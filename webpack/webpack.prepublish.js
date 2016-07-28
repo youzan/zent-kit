@@ -1,22 +1,23 @@
-var projectConf;
+var path = require('path');
 
 var defaultConf = {
     externals: [{
         'react': {
-          amd: 'react',
-          root: 'React',
-          commonjs2: 'react',
-          commonjs: 'react'
+            amd: 'react',
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react'
         },
         'react-dom': {
-          amd: 'react-dom',
-          root: 'ReactDOM',
-          commonjs2: 'react-dom',
-          commonjs: 'react-dom'
+            amd: 'react-dom',
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom'
         }
     }]
 };
 
+var projectConf;
 try {
     projectConf = require(path.resolve(process.cwd(), './zent.webpack.config.js'));
 } catch (ex) {
@@ -30,10 +31,10 @@ module.exports = function(entry, output) {
 
     var webpackConfig = {
         output: {
-          filename: 'main.js',
-          path: output,
-          library: lab,
-          libraryTarget: 'umd'
+            filename: 'main.js',
+            path: output,
+            library: lab,
+            libraryTarget: 'umd'
         }
     };
 
