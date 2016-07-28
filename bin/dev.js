@@ -6,4 +6,4 @@ module.exports = function() {
         build();
         require('./server');
     }
-}
+};

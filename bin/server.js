@@ -12,30 +12,32 @@ var gutil = require('gulp-util');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
-var app = koa(),
-    router = koarouter();
+var app = koa();
+var router = koarouter();
 
 // markdown的语法高亮
 marked.setOptions({
-  highlight: function (code) {
-    return hljs.highlightAuto(code).value;
-  }
+    highlight: function(code) {
+        return hljs.highlightAuto(code).value;
+    }
 });
 
 var projectPath = process.cwd();
 var paths = {
     nodeModules: path.resolve(__dirname, '../node_modules'),
-    manuelPath: path.resolve(__dirname, '../manuel'), //  服务端资源
+    manualPath: path.resolve(__dirname, '../manual'), //  服务端资源
     assetsPath: path.resolve(__dirname, '../assets'),   // 服务端静态资源
     tmp: path.resolve(__dirname, '../.tmp'),    // 服务端开发文件
     projectPath: projectPath   //  开发项目路径
 };
-var layout = fs.readFileSync(paths.manuelPath + '/layout.html');
+var layout = fs.readFileSync(paths.manualPath + '/layout.html');
 
 var files = fs.readdirSync(paths.projectPath + '/examples');
-var navList = files.filter(function (filename) {
+var navList = files
+    .filter(function(filename) {
         return /.js$/.test(filename);
-    }).map(function (filename) {
+    })
+    .map(function(filename) {
         return `/examples/${filename.split('.')[0]}`;
     });
 navList.unshift('/readme');
@@ -66,7 +68,7 @@ var exportEX = function *(next) {
     };
 
     this.body =  _.template(layout)(data);
-}
+};
 
 // router: readme
 router.get('/readme', function *(next) {
@@ -92,7 +94,7 @@ router.redirect('/', '/readme');
 
 // 静态资源
 app.use(koastatic(paths.assetsPath));
-app.use(koastatic(paths.nodeModules))
+app.use(koastatic(paths.nodeModules));
 app.use(koastatic(path.join(paths.tmp, 'build')));
 app.use(koastatic(path.join(paths.projectPath, 'src')));
 

@@ -22,7 +22,7 @@ if (projectDir === kitDir) {
 }
 
 
-switch(operation) {
+switch (operation) {
     case 'init':
         var init = require('./bin/init');
         gutil.log(gutil.colors.green('-> 初始化项目\n'));

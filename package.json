@@ -4,7 +4,8 @@
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint index.js bin webpack manual"
   },
   "repository": {
     "type": "git",

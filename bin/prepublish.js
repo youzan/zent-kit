@@ -21,14 +21,14 @@ var switchUMD = require('./switchUMD');
 var projectPath = process.cwd();
 var config = require(`${projectPath}/package.json`);
 var paths = {
-        projectPath: projectPath,
-        src: path.join(projectPath, '/src'),
-        lib: path.join(projectPath, '/lib/'),
-        dist: path.join(projectPath, '/dist/'),
-        index: path.join(projectPath, '/src/index'),
-        webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),   // webpack
-        readmeSrc: path.join(__dirname, '../manuel/readme.md')    // 项目readme的源文件
-    };
+    projectPath: projectPath,
+    src: path.join(projectPath, '/src'),
+    lib: path.join(projectPath, '/lib/'),
+    dist: path.join(projectPath, '/dist/'),
+    index: path.join(projectPath, '/src/index'),
+    webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),   // webpack
+    readmeSrc: path.join(__dirname, '../manual/readme.md')    // 项目readme的源文件
+};
 
 // 读取src下文件
 function getContent(path) {
@@ -40,7 +40,7 @@ function getContent(path) {
         } else {
             /(.js|.jsx|.es6)$/.test(item) && fileList.push(fs.readFileSync(path + '/' + item, 'utf8'));
         }
-    })
+    });
     return fileList;
 }
 
@@ -56,7 +56,7 @@ function getComment(list) {
                 } else {
                     return value.slice(2, -2);
                 }
-            }))
+            }));
         }
     });
 
@@ -80,9 +80,11 @@ module.exports = function() {
 
         var files = getContent(paths.src);
         var comments = getComment(files);
-        var readme = _.template(fs.readFileSync(paths.readmeSrc))(Object.assign({
-                comments: comments
-            }, config));
+        var readme = _.template(fs.readFileSync(paths.readmeSrc))(
+          Object.assign({
+              comments: comments
+          }, config)
+        );
 
         fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
     });
@@ -106,30 +108,30 @@ module.exports = function() {
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
             .pipe(babel({
                 presets: [
-                  'babel-preset-es2015',
-                  'babel-preset-react',
-                  'babel-preset-stage-1'
+                    'babel-preset-es2015',
+                    'babel-preset-react',
+                    'babel-preset-stage-1'
                 ].map(require.resolve),
                 plugins: [
-                  'babel-plugin-add-module-exports',
-                  'babel-plugin-transform-decorators-legacy'
+                    'babel-plugin-add-module-exports',
+                    'babel-plugin-transform-decorators-legacy'
                 ].map(require.resolve)
             }))
             .pipe(gulp.dest(paths.lib));
     });
 
     // css 转码
-    gulp.task('prepare:css', function () {
+    gulp.task('prepare:css', function() {
         gutil.log('-------> Prepare  CSS');
 
-        var name = config.zent && config.zent.sass ? config.zent.sass : 'index'
+        var name = config.zent && config.zent.sass ? config.zent.sass : 'index';
         var cssPath = checkfile('assets/' + name + '.scss');
-        if(cssPath) {
+        if (cssPath) {
             var processors = [precss, autoprefixer];
             gulp.src(cssPath)
                 .pipe(postcss(processors, {syntax: scss}))
                 .pipe(rename(function(path) {
-                    path.extname = ".css"
+                    path.extname = '.css';
                 }))
                 .pipe(gulp.dest(paths.lib));
         }
@@ -144,4 +146,4 @@ module.exports = function() {
     });
 
     runSequence(['clean', 'prepare:css', 'prepare:js']);
-}
+};

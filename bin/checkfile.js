@@ -9,7 +9,7 @@ module.exports = function(dir) {
 
     try {
         fs.accessSync(filePath);
-    } catch(ex) {
+    } catch (ex) {
         hasFile = false;
     }
 
@@ -20,4 +20,4 @@ module.exports = function(dir) {
     }
 
     return filePath;
-}
+};
