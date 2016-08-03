@@ -73,7 +73,7 @@ module.exports = function(name) {
         exec('cd ' + name + '; felint init -6', function(err, stdout, stderr) {
           if (err) {
             gutil.log(gutil.colors.red(stderr));
-            gutil.log(guitl.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
+            gutil.log(gutil.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
           }
           callback();
         });
@@ -84,7 +84,6 @@ module.exports = function(name) {
         gutil.log('------> 初始化 git');
 
         exec('cd ' + name + '; pwd; git init', function(err, stdout, stderr) {
-          // do nothing now
           gutil.log(gutil.colors.green('----> 初始化完成！'));
           callback();
         });
