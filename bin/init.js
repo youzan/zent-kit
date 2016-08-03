@@ -75,6 +75,8 @@ module.exports = function(name) {
             gutil.log(gutil.colors.red(stderr));
             gutil.log(gutil.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
             gutil.log(gutil.colors.green('felint 安装指令：ynpm(npm) install -g felint'));
+          } else {
+            gutil.log(gutil.colors.green('初始化完成'));
           }
           callback();
         });
