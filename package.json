@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.2.31",
+  "version": "0.2.33",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -56,6 +56,7 @@
     "postcss-for": "^2.1.1",
     "postcss-loader": "^0.9.1",
     "postcss-scss": "^0.1.7",
+    "postcss-inline-comment": "^3.0.0",
     "precss": "^1.4.0",
     "primer-markdown": "^3.2.0",
     "react": "15.0.2",
@@ -67,8 +68,5 @@
     "vinyl-named": "^1.1.0",
     "webpack": "^1.13.0",
     "webpack-livereload-plugin": "^0.8.1"
-  },
-  "devDependencies": {
-    "postcss-inline-comment": "^3.0.0"
   }
 }

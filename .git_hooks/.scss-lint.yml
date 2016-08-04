@@ -133,15 +133,7 @@ linters:
 
   PropertyUnits:
     enabled: true
-    global: [
-      'ch', 'em', 'ex', 'rem',                 # Font-relative lengths
-      'cm', 'in', 'mm', 'pc', 'pt', 'px', 'q', # Absolute lengths
-      'vh', 'vw', 'vmin', 'vmax',              # Viewport-percentage lengths
-      'deg', 'grad', 'rad', 'turn',            # Angle
-      'ms', 's',                               # Duration
-      'Hz', 'kHz',                             # Frequency
-      'dpi', 'dpcm', 'dppx',                   # Resolution
-      '%']                                     # Other
+    global: ['ch', 'em', 'ex', 'rem','cm', 'in', 'mm', 'pc', 'pt', 'px', 'q','vh', 'vw', 'vmin', 'vmax','deg', 'grad', 'rad', 'turn','ms', 's','Hz', 'kHz','dpi', 'dpcm', 'dppx','%']
     properties: {}
 
   PseudoElement:
