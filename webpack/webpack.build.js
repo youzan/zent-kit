@@ -1,25 +1,13 @@
 var LiveReloadPlugin = require('webpack-livereload-plugin');
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
-var postcssImport = require('@youzan/postcss-import');
+var postcssPlugin = require('./postcss.conf');
 
 module.exports = function(entry, output) {
     var webpackBase = require('./webpack.base.js')(entry, output);
     var webpackConfig = {
         watch: true,
-        devtool: 'eval-source-map',
+        devtool: 'source-map',
         postcss: function(webpack) {
-            return [
-                postcssImport({
-                    addDependencyTo: webpack,
-                    extensions: [
-                        '.scss',
-                        '.css'
-                    ]
-                }),
-                precss,
-                autoprefixer
-            ];
+            return postcssPlugin(webpack, true);
         },
         plugins: [new LiveReloadPlugin()]
     };

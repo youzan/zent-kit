@@ -1,7 +1,5 @@
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
-
 var sassArr = ['style-loader', 'css-loader', 'postcss-loader'].map(require.resolve);
+var postcssPlugin = require('./postcss.conf');
 
 module.exports = function(entry, output) {
     var webpackConfig = {
@@ -28,10 +26,7 @@ module.exports = function(entry, output) {
             }
         ]},
         postcss: function() {
-            return [
-                precss,
-                autoprefixer
-            ];
+            return postcssPlugin(false);
         },
         entry: [entry],
         output: {
