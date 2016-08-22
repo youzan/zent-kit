@@ -13,7 +13,6 @@ body {
 
 .demo-header-list {
   padding: 0 0 16px;
-  list-style-position: inside;
   list-style-type: upper-roman;
   margin: 0 0 32px;
   border-bottom: 1px solid #ececec;
@@ -22,11 +21,13 @@ body {
 .demo-header-list li {
   float: left;
   width: 25%;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
-.demo-header-list li:nth-child(-n+4) {
-  margin-top: 0;
+.demo-header-list li a {
+  display: inline-block;
+  width: 80%;
+  overflow: scroll;
 }
 
 .demo-runner {
