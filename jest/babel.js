@@ -29,6 +29,7 @@ var createTransformer = function(options) {
         process: function(src, filename, config, preprocessorOptions) {
             var plugins = options.plugins || [];
 
+            // 这个参数是为了兼容新版的jest-runtime，现在还没发布
             if (preprocessorOptions && preprocessorOptions.instrument) {
                 plugins = plugins.concat(require('babel-plugin-istanbul').default);
             }
