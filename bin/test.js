@@ -3,7 +3,6 @@
 var path = require('path');
 var ch = require('child_process');
 var fs = require('fs');
-var mergeWith = require('lodash/mergeWith');
 var assign = require('lodash/assign');
 var jsonfile = require('jsonfile');
 
@@ -12,14 +11,32 @@ function getJestAbsolutePath(filename) {
 }
 
 function getDefaultJestConfig() {
-    return {
+    var config = {
         automock: false,
-        scriptPreprocessor: getJestAbsolutePath('babel.js'),
-        moduleNameMapper: {
-            // Ignore all resource files when testing
-            '^.*[.](css|CSS|less|LESS|SASS|sass|SCSS|scss|png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|webp|WEBP)$': getJestAbsolutePath('empty-module.js')
-        }
+        scriptPreprocessor: getJestAbsolutePath('babel.js')
     };
+
+    // 测试的时候忽略所有require的资源文件
+    var resourceExtensions = [
+        'css', 'scss', 'less', 'sass',
+        'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg',
+        'eot', 'ttf', 'woff', 'woff2'
+    ];
+    var emptyModule = getJestAbsolutePath('empty-module.js');
+
+    // Jest对moduleNameMapper的处理其实是value作为key的，所以一个模块只能对应一个正则。
+    // 我们对扩展名做了忽略大小处理，所以看着比较复杂，效果等价于/^.*[.](css|less|...)$/i
+    var extRegexp = resourceExtensions.map(function(ext) {
+        return ext.split('').map(function(c) {
+            var lower = c.toLowerCase();
+            var upper = c.toUpperCase();
+            return lower === upper ? lower : '[' + lower + upper + ']';
+        }).join('');
+    }).join('|');
+    var moduleNameMapper = config.moduleNameMapper = {};
+    moduleNameMapper['^.*[.](' + extRegexp + ')$'] = emptyModule;
+
+    return config;
 }
 
 /**
@@ -36,12 +53,7 @@ function resolveJestConfig() {
         var packageJestConfig = packageData.jest || {};
     }
 
-    var jestConfig = mergeWith(getDefaultJestConfig(), packageJestConfig, function(objValue, srcValue, key, object, source, stack) {
-        if (key === 'moduleNameMapper') {
-            return assign({}, objValue, srcValue);
-        }
-    });
-    return jestConfig;
+    return assign(getDefaultJestConfig(), packageJestConfig);
 }
 
 module.exports = function(params) {
