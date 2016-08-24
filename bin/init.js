@@ -68,19 +68,20 @@ module.exports = function(name) {
     });
 
     gulp.task('install:felint', function(callback) {
-        gutil.log('------> 初始化 felint init -6');
+        var felintCmd = 'felint init -6 --youzan';
+        gutil.log('------> 初始化 ' + felintCmd);
 
-        exec('cd ' + name + '; felint init -6', function(err, stdout, stderr) {
-          if (err) {
-            gutil.log(gutil.colors.red(stderr));
-            gutil.log(gutil.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
-            gutil.log(gutil.colors.green('felint 安装指令：ynpm(npm) install -g felint'));
-          } else {
-            gutil.log(gutil.colors.green('初始化完成'));
-          }
-          callback();
+        exec('cd ' + name + '; ' + felintCmd, function(err, stdout, stderr) {
+            if (err) {
+                gutil.log(gutil.colors.red(stderr));
+                gutil.log(gutil.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
+                gutil.log(gutil.colors.green('felint 安装指令：ynpm(npm) install -g felint'));
+            } else {
+                gutil.log(gutil.colors.green('初始化完成'));
+            }
+            callback();
         });
-    })
+    });
 
     if (!name) {
         logger('   sir: we need a project name');
