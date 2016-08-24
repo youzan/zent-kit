@@ -3,7 +3,6 @@
 var path = require('path');
 var ch = require('child_process');
 var fs = require('fs');
-var assign = require('lodash/assign');
 var jsonfile = require('jsonfile');
 
 function getJestAbsolutePath(filename) {
@@ -25,7 +24,9 @@ function getDefaultJestConfig() {
     var emptyModule = getJestAbsolutePath('empty-module.js');
 
     // Jest对moduleNameMapper的处理其实是value作为key的，所以一个模块只能对应一个正则。
-    // 我们对扩展名做了忽略大小处理，所以看着比较复杂，效果等价于/^.*[.](css|less|...)$/i
+    // 我们对扩展名做了忽略大小处理，所以看着比较复杂，效果等价于/^.*[.](css|less|...)$/i。
+    // 例如我们只需要处理css和scss后缀，那么最终生成的正则表达式是这个样子的：
+    // ^.*[.]([Cc][Ss][Ss]|[Ss][Cc][Ss][Ss])$
     var extRegexp = resourceExtensions.map(function(ext) {
         return ext.split('').map(function(c) {
             var lower = c.toLowerCase();
@@ -53,7 +54,7 @@ function resolveJestConfig() {
         var packageJestConfig = packageData.jest || {};
     }
 
-    return assign(getDefaultJestConfig(), packageJestConfig);
+    return Object.assign(getDefaultJestConfig(), packageJestConfig);
 }
 
 module.exports = function(params) {
