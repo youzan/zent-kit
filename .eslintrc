@@ -15,27 +15,6 @@
         "ecmaVersion": 5,
         "ecmaFeatures": {
             "jsx": true,
-            "modules": true,
-            "arrowFunctions": true,
-            "binaryLiterals": true,
-            "blockBindings": true,
-            "classes": true,
-            "defaultParams": true,
-            "destructuring": true,
-            "forOf": true,
-            "generators": true,
-            "objectLiteralComputedProperties": true,
-            "objectLiteralDuplicateProperties": true,
-            "objectLiteralShorthandMethods": true,
-            "objectLiteralShorthandProperties": true,
-            "octalLiterals": true,
-            "regexUFlag": true,
-            "regexYFlag": true,
-            "restParams": true,
-            "spread": true,
-            "superInFunctions": true,
-            "templateStrings": true,
-            "unicodeCodePointEscapes": true,
             "globalReturn": true,
             "experimentalObjectRestSpread": true
         }
@@ -234,7 +213,7 @@
         ],
         "jsx-quotes": 0,
         "key-spacing": [
-            2,
+            1,
             {
                 "beforeColon": false,
                 "afterColon": true
@@ -311,7 +290,7 @@
         ],
         "sort-vars": 0,
         "space-before-blocks": [
-            2,
+            1,
             "always"
         ],
         "space-before-function-paren": [
@@ -322,18 +301,18 @@
             }
         ],
         "keyword-spacing": [
-            2,
+            1,
             {
                 "before": true,
                 "after": true
             }
         ],
         "space-in-parens": [
-            2,
+            1,
             "never"
         ],
         "space-infix-ops": [
-            2,
+            1,
             {
                 "int32Hint": false
             }
@@ -365,6 +344,7 @@
         "no-const-assign": 2,
         "no-this-before-super": 2,
         "react/jsx-uses-vars": 2,
-        "react/jsx-uses-react": 2
+        "react/jsx-uses-react": 2,
+        "chonsistent-this": 0
     }
 }

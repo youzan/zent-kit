@@ -48,6 +48,7 @@ checkAndInstallPackage 'babel-eslint' '@6.0.4'
 checkAndInstallPackage 'eslint-plugin-import' '@1.8.1'
 checkAndInstallPackage 'eslint-plugin-jsx-a11y' '@1.2.3'
 checkAndInstallPackage 'eslint-config-airbnb' '@9.0.1'
+checkAndInstallPackage 'eslint-plugin-lean-imports' '@0.3.3'
 
 # cd to hooks folder
 cd ./.git_hooks
