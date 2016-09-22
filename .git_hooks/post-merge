@@ -68,24 +68,24 @@ fi
 #update hooks auto update
 if [[ "${changedfiles[*]}" =~ ".git_hooks/update_git_hooks.sh" ]]; then
     echo "update git hooks"
-    make update_hooks
+    felint update
     exit 0
 fi
 
 if [[ "${changedfiles[*]}" =~ ".git_hooks/.eslintrc_es5" ]]; then
     echo "update git eslintrc_es5"
-    make update_hooks
+    felint update
     exit 0
 fi
 
 if [[ "${changedfiles[*]}" =~ ".git_hooks/.eslintrc_es6" ]]; then
     echo "update git eslintrc_es6"
-    make update_hooks
+    felint update
     exit 0
 fi
 
 if [[ "${changedfiles[*]}" =~ ".git_hooks/.eslintignore" ]]; then
     echo "update git eslintignore"
-    make update_hooks
+    felint update
     exit 0
 fi
