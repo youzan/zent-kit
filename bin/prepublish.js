@@ -19,15 +19,19 @@ var logger = console.log.bind(console);
 var switchUMD = require('./switchUMD');
 
 var projectPath = process.cwd();
-var config = require(`${projectPath}/package.json`);
+var config = require(projectPath + '/package.json');
 var paths = {
     projectPath: projectPath,
     src: path.join(projectPath, '/src'),
     lib: path.join(projectPath, '/lib/'),
     dist: path.join(projectPath, '/dist/'),
     index: path.join(projectPath, '/src/index'),
-    webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),   // webpack
-    readmeSrc: path.join(__dirname, '../manual/readme.md')    // 项目readme的源文件
+
+    // webpack
+    webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),
+
+    // 项目readme的源文件
+    readmeSrc: path.join(__dirname, '../manual/readme.md')
 };
 
 // 读取src下文件
@@ -145,5 +149,5 @@ module.exports = function() {
         });
     });
 
-    runSequence(['clean', 'prepare:css', 'prepare:js']);
+    runSequence('clean', ['prepare:css', 'prepare:js']);
 };
