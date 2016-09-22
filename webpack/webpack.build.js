@@ -5,7 +5,7 @@ module.exports = function(entry, output) {
     var webpackBase = require('./webpack.base.js')(entry, output);
     var webpackConfig = {
         watch: true,
-        devtool: 'source-map',
+        // devtool: 'source-map',
         postcss: function(webpack) {
             return postcssPlugin(webpack, true);
         },
