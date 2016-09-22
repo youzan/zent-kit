@@ -1,6 +1,6 @@
 #!/bin/sh
 # curl -s -o /dev/null "www.qima-inc.com/commit/create?user=$(git config user.name)&comments=pre-commit"
-curl -s -G -o /dev/null "www.qima-inc.com/commit/create" --data-urlencode "user=$(git config user.name)" --data-urlencode "comments=pre-commit" --data-urlencode "repo=$(git config --get remote.origin.url)"
+curl -s -G -o /dev/null "www.qima-inc.com/commit/create" --data-urlencode "user=$(git config user.name)" --data-urlencode "comments=pre-commit" --data-urlencode "repo=$(git config --get remote.origin.url)" &
 
 CHANGED_FILES=$(git diff --cached --name-only)
 
@@ -74,7 +74,7 @@ if ! $PASS; then
   exit 1
 else
   echo "\033[42mCOMMIT SUCCEEDED\033[0m\n"
-  curl -s -o /dev/null "www.qima-inc.com/commit/create?user=$(git config user.name)&comments=eslint"
+  curl -s -o /dev/null "www.qima-inc.com/commit/create?user=$(git config user.name)&comments=eslint" &
 fi
 
 exit $?
