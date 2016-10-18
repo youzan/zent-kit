@@ -1,5 +1,6 @@
 var sassArr = ['style-loader', 'css-loader', 'postcss-loader'].map(require.resolve);
 var postcssPlugin = require('./postcss.conf');
+var babelPackages = require('./babelPackages');
 
 module.exports = function(entry, output) {
     var webpackConfig = {
@@ -7,15 +8,8 @@ module.exports = function(entry, output) {
             loaders: [{
                 test: /\.(es6|js|jsx)$/, loader: require.resolve('babel-loader'),
                 query: {
-                    presets: [
-                        'babel-preset-es2015',
-                        'babel-preset-react',
-                        'babel-preset-stage-1'
-                    ].map(require.resolve),
-                    plugins: [
-                        'babel-plugin-add-module-exports',
-                        'babel-plugin-transform-decorators-legacy'
-                    ].map(require.resolve)
+                    presets: babelPackages.presets.map(require.resolve),
+                    plugins: babelPackages.plugins.map(require.resolve)
                 }
             }, {
                 test: /\.(png|jpg|jpeg)$/,

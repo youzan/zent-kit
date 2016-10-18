@@ -6,20 +6,15 @@
 */
 
 var babel = require('babel-core');
+var babelPackages = require('../webpack/babelPackages');
 
 var createTransformer = function(options) {
     options = Object.assign({}, options, {
         auxiliaryCommentBefore: ' istanbul ignore next ',
-        presets: ((options && options.presets) || []).concat([
-            'babel-preset-es2015',
-            'babel-preset-react',
-            'babel-preset-stage-1',
-            'babel-preset-jest'
-        ].map(require.resolve)),
-        plugins: ((options && options.plugins) || []).concat([
-            'babel-plugin-add-module-exports',
-            'babel-plugin-transform-decorators-legacy'
-        ].map(require.resolve)),
+        presets: ((options && options.presets) || []).concat(
+            ['babel-preset-jest'].concat(babelPackages.presets).map(require.resolve)
+        ),
+        plugins: ((options && options.plugins) || []).concat(babelPackages.plugins.map(require.resolve)),
         retainLines: true
     });
     delete options.cacheDirectory;

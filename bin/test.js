@@ -12,6 +12,19 @@ function getJestAbsolutePath(filename) {
 function getDefaultJestConfig() {
     var config = {
         automock: false,
+
+        // statements和branches比较难做高，这些阈值我们先设置得低一些，后续可以慢慢调整。
+        collectCoverage: true,
+        coverageReporters: ['text', 'text-summary', 'lcov', 'html'],
+        coverageThreshold: {
+            global: {
+                statements: 60,
+                branches: 50,
+                functions: 85,
+                lines: 90
+            }
+        },
+
         scriptPreprocessor: getJestAbsolutePath('babel.js')
     };
 
