@@ -8,10 +8,10 @@ var clean = require('gulp-clean');
 var _ = require('lodash');
 var postcss = require('gulp-postcss');
 var scss = require('postcss-scss');
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
+var base64 = require('@youzan/postcss-base64');
 var webpack = require('webpack');
 var gutil = require('gulp-util');
+var postcssPlugin = require('../webpack/postcss.conf');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
@@ -131,9 +131,11 @@ module.exports = function() {
         var name = config.zent && config.zent.sass ? config.zent.sass : 'index';
         var cssPath = checkfile('assets/' + name + '.scss');
         if (cssPath) {
-            var processors = [precss, autoprefixer];
             gulp.src(cssPath)
-                .pipe(postcss(processors, {syntax: scss}))
+                .pipe(postcss(postcssPlugin(null, false).concat(base64({
+                    base: path.resolve(cssPath, '..'),
+                    extensions: ['.svg', '.png', '.jpg']
+                })), {syntax: scss}))
                 .pipe(rename(function(path) {
                     path.extname = '.css';
                 }))
