@@ -134,7 +134,7 @@ module.exports = function() {
             gulp.src(cssPath)
                 .pipe(postcss(postcssPlugin(null, false).concat(base64({
                     base: path.resolve(cssPath, '..'),
-                    extensions: ['.svg', '.png', '.jpg']
+                    extensions: ['.png', '.jpg']
                 })), {syntax: scss}))
                 .pipe(rename(function(path) {
                     path.extname = '.css';
