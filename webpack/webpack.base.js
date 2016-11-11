@@ -19,8 +19,8 @@ module.exports = function(entry, output) {
                 loader: sassArr.join('!')
             }
         ]},
-        postcss: function() {
-            return postcssPlugin(false);
+        postcss: function(webpack) {
+            return postcssPlugin(webpack, false);
         },
         entry: [entry],
         output: {
