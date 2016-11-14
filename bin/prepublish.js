@@ -11,7 +11,8 @@ var scss = require('postcss-scss');
 var base64 = require('@youzan/postcss-base64');
 var webpack = require('webpack');
 var gutil = require('gulp-util');
-var postcssPlugin = require('../webpack/postcss.conf');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
@@ -132,7 +133,7 @@ module.exports = function() {
         var cssPath = checkfile('assets/' + name + '.scss');
         if (cssPath) {
             gulp.src(cssPath)
-                .pipe(postcss(postcssPlugin(null, false).concat(base64({
+                .pipe(postcss([precss, autoprefixer].concat(base64({
                     base: path.resolve(cssPath, '..'),
                     extensions: ['.png', '.jpg']
                 })), {syntax: scss}))
