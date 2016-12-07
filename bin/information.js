@@ -30,6 +30,7 @@ module.exports = function(dir) {
     logger('\nCommand:');
     logger('    init <name>     项目初始化');
     logger('    dev             开发者模式');
+    logger('    test            运行测试(Jest)');
     logger('    prepublish      发布预处理');
     logger('    get [names]     重获某个基础文件');
     logger('    pwd             查看使用中的 zent-kit 路径');

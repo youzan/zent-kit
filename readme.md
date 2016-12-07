@@ -24,6 +24,12 @@ zent-kit init <your component name>
 zent-kit dev
 ```
 
+### 测试
+
+```bash
+zent-kit test
+```
+
 ### 发布
 
 ```bash
