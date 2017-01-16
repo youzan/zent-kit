@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.2.43",
+  "version": "0.2.44",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "zent-kit": "./index.js"
   },
   "author": "zhangmengxuan",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@youzan/postcss-base64": "^0.4.4",
     "@youzan/postcss-import": "8.1.2",

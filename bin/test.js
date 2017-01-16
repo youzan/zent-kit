@@ -25,6 +25,10 @@ function getDefaultJestConfig() {
             }
         },
 
+        // ported from newer version to support jsx files
+        moduleFileExtensions: ['js', 'json', 'jsx', 'node'],
+        testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$',
+
         scriptPreprocessor: getJestAbsolutePath('babel.js')
     };
 

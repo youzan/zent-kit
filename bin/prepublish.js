@@ -19,6 +19,8 @@ var logger = console.log.bind(console);
 
 var switchUMD = require('./switchUMD');
 
+var babelPackages = require('../webpack/babelPackages');
+
 var projectPath = process.cwd();
 var config = require(projectPath + '/package.json');
 var paths = {
@@ -112,15 +114,8 @@ module.exports = function() {
     gulp.task('babel', function() {
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
             .pipe(babel({
-                presets: [
-                    'babel-preset-es2015',
-                    'babel-preset-react',
-                    'babel-preset-stage-1'
-                ].map(require.resolve),
-                plugins: [
-                    'babel-plugin-add-module-exports',
-                    'babel-plugin-transform-decorators-legacy'
-                ].map(require.resolve)
+                presets: babelPackages.presets.map(require.resolve),
+                plugins: babelPackages.plugins.map(require.resolve)
             }))
             .pipe(gulp.dest(paths.lib));
     });
