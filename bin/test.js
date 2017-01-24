@@ -4,6 +4,7 @@ var path = require('path');
 var ch = require('child_process');
 var fs = require('fs');
 var jsonfile = require('jsonfile');
+var tmp = require('tmp');
 
 function getJestAbsolutePath(filename) {
     return path.resolve(__dirname, '../jest', filename);
@@ -25,11 +26,11 @@ function getDefaultJestConfig() {
             }
         },
 
-        // ported from newer version to support jsx files
-        moduleFileExtensions: ['js', 'json', 'jsx', 'node'],
-        testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$',
+        timers: 'fake',
 
-        scriptPreprocessor: getJestAbsolutePath('babel.js')
+        transform: {
+            '.(js|jsx)$': getJestAbsolutePath('babel.js')
+        }
     };
 
     // 测试的时候忽略所有require的资源文件
@@ -76,7 +77,7 @@ function resolveJestConfig() {
 
 module.exports = function(params) {
     // 生成Jest配置文件
-    var jestConfigFile = getJestAbsolutePath('config.json');
+    var jestConfigFile = tmp.tmpNameSync();
     var jestConfig = resolveJestConfig();
     jsonfile.writeFileSync(jestConfigFile, jestConfig, {spaces: 2});
 
@@ -87,5 +88,6 @@ module.exports = function(params) {
     // remove jest config file
     child.on('exit', function(code, signal) {
         fs.unlinkSync(jestConfigFile);
+        process.exit(signal ? -1 : code);
     });
 };
