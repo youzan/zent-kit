@@ -24,7 +24,7 @@ function checkUpdates(callback) {
 
             var toVersionNumber = function(versionString) {
                 return parseInt(versionString.trim().replace(/\./g, ''), 10);
-            }
+            };
 
             var localVersion = toVersionNumber(config.version);
             var remoteVersion = toVersionNumber(stdout);

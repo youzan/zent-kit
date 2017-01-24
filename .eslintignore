@@ -3,3 +3,5 @@
 **/vendor
 **/node_modules
 **/dist
+
+bin/server.js

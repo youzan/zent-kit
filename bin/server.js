@@ -38,7 +38,7 @@ var navList = files
         return /.js$/.test(filename);
     })
     .map(function(filename) {
-        return `/examples/${filename.split('.')[0]}`;
+        return '/examples/' + filename.split('.')[0];
     });
 navList.unshift('/readme');
 

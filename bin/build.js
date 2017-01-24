@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+/* eslint-disable no-inline-comments */
+
 var path = require('path');
 var webpack = require('webpack');
 var gulp = require('gulp');
