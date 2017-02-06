@@ -59,10 +59,10 @@ var createTransformer = function createTransformer(options) {
   options = Object.assign({}, options, {
     auxiliaryCommentBefore: ' istanbul ignore next ',
     presets: (options && options.presets || [])
-        .concat(babelPackages.presets.map(require.resolve))
+        .concat(babelPackages.build.presets.map(require.resolve))
         .concat([jestPreset]),
     plugins: ((options && options.plugins) || [])
-        .concat(babelPackages.plugins.map(require.resolve)),
+        .concat(babelPackages.build.plugins.map(require.resolve)),
     retainLines: true
   });
   delete options.cacheDirectory;
@@ -100,44 +100,3 @@ var createTransformer = function createTransformer(options) {
 
 module.exports = createTransformer();
 module.exports.createTransformer = createTransformer;
-
-// var babel = require('babel-core');
-// var babelPackages = require('../webpack/babelPackages');
-
-// var createTransformer = function(options) {
-//     options = Object.assign({}, options, {
-//         auxiliaryCommentBefore: ' istanbul ignore next ',
-//         presets: ((options && options.presets) || []).concat(
-//             ['babel-preset-jest'].concat(babelPackages.presets).map(require.resolve)
-//         ),
-//         plugins: ((options && options.plugins) || []).concat(babelPackages.plugins.map(require.resolve)),
-//         retainLines: true
-//     });
-//     devare options.cacheDirectory;
-
-//     return {
-//         canInstrument: true,
-//         process: function(src, filename, config, preprocessorOptions) {
-//             var plugins = options.plugins || [];
-
-//             // 这个参数是为了兼容新版的jest-runtime，现在还没发布
-//             // if (preprocessorOptions && preprocessorOptions.instrument) {
-//             plugins = plugins.concat(require('babel-plugin-istanbul').default);
-//             // }
-
-//             if (babel.util.canCompile(filename)) {
-//                 return babel.transform(
-//                     src,
-//                     Object.assign({}, options, {
-//                         filename: filename,
-//                         plugins: plugins
-//                     })
-//                 ).code;
-//             }
-//             return src;
-//         }
-//     };
-// };
-
-// module.exports = createTransformer();
-// module.exports.createTransformer = createTransformer;

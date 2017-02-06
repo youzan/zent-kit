@@ -40,7 +40,7 @@ module.exports = function(name) {
         callback();
     });
 
-    // 单独再导入package.sjon
+    // 单独再导入package.json
     gulp.task('init:package', function(callback) {
         gutil.log('-------> 生成 package.json');
 
@@ -88,5 +88,5 @@ module.exports = function(name) {
         return;
     }
 
-    runSequence('copy', 'init:readme', 'init:package', 'install:npm', 'install:felint');
+    runSequence('copy', 'init:readme', 'install:npm');
 };

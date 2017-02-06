@@ -2,14 +2,15 @@ var sassArr = ['style-loader', 'css-loader', 'postcss-loader'].map(require.resol
 var postcssPlugin = require('./postcss.conf');
 var babelPackages = require('./babelPackages');
 
-module.exports = function(entry, output) {
+module.exports = function(entry, output, env) {
+    var packages = babelPackages[env];
     var webpackConfig = {
         module: {
             loaders: [{
                 test: /\.(es6|js|jsx)$/, loader: require.resolve('babel-loader'),
                 query: {
-                    presets: babelPackages.presets.map(require.resolve),
-                    plugins: babelPackages.plugins.map(require.resolve)
+                    presets: packages.presets.map(require.resolve),
+                    plugins: packages.plugins.map(require.resolve)
                 }
             }, {
                 test: /\.(png|jpg|jpeg)$/,

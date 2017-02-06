@@ -1,6 +1,6 @@
 {
   "name": "@youzan/zent-kit",
-  "version": "0.2.45",
+  "version": "0.2.46",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -44,6 +44,8 @@
     "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
     "babel-plugin-transform-es3-property-literals": "^6.8.0",
     "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-plugin-transform-remove-console": "^6.8.0",
+    "babel-plugin-transform-remove-debugger": "^6.8.0",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-jest": "18.0.0",

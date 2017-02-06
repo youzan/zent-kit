@@ -27,7 +27,7 @@ try {
 module.exports = function(entry, output) {
     var arr = output.split('/');
     var lab = arr[arr.length - 3];
-    var webpackBase = require('./webpack.base.js')(entry, output);
+    var webpackBase = require('./webpack.base.js')(entry, output, 'prepublish');
 
     var webpackConfig = {
         output: {

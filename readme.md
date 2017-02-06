@@ -81,18 +81,16 @@ ReactME文件的规范包含：
 
 如果不使用zent-kit init，自行编写的package.json需参考以下代码
 
-```bash
+```json
 {
   ...
-  "description": "这是一个React组件",
-  "main": "./lib/Index.js",
+  "name": "组件名称",
+  "description": "这是一个React组件的描述",
+  "main": "./lib/index.js",
   "scripts": {
     "dev": "zent-kit dev",
-    "lint": "node node_modules/eslint/bin/eslint ./src",
+    "lint": "eslint ./src",
     "prepublish": "npm run lint && zent-kit prepublish"
-  },
-  "dependencies": {
-    "react": "^15.0.x"
   },
   "files": [
     "src/",
@@ -101,11 +99,11 @@ ReactME文件的规范包含：
     "lib/",
     "dist/"
   ],
+  "dependencies": {
+      ...
+  },
   "devDependencies": {
-    "eslint": "^2.8.x",
-    "eslint-config-airbnb": "^7.0.x",
-    "eslint-plugin-jsx-a11y": "^0.6.x",
-    "eslint-plugin-react": "^5.0.x"
+      ...
   }
   ...
 }

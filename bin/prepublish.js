@@ -114,8 +114,8 @@ module.exports = function() {
     gulp.task('babel', function() {
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
             .pipe(babel({
-                presets: babelPackages.presets.map(require.resolve),
-                plugins: babelPackages.plugins.map(require.resolve)
+                presets: babelPackages.prepublish.presets.map(require.resolve),
+                plugins: babelPackages.prepublish.plugins.map(require.resolve)
             }))
             .pipe(gulp.dest(paths.lib));
     });

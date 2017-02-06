@@ -1,4 +1,4 @@
-module.exports = {
+var common = {
     presets: [
         'babel-preset-es2015',
         'babel-preset-react',
@@ -16,4 +16,21 @@ module.exports = {
         'babel-plugin-transform-es3-member-expression-literals',
         'babel-plugin-transform-es3-property-literals'
     ]
+};
+
+module.exports = {
+    build: {
+        presets: common.presets.slice(),
+        plugins: common.plugins.slice()
+    },
+
+    prepublish: {
+        presets: common.presets.slice(),
+
+        plugins: common.plugins.concat([
+            // 删掉这些没用的代码
+            'babel-plugin-transform-remove-debugger',
+            'babel-plugin-transform-remove-console'
+        ])
+    }
 };
