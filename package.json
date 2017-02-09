@@ -1,6 +1,6 @@
 {
-  "name": "@youzan/zent-kit",
-  "version": "0.2.46",
+  "name": "zent-kit",
+  "version": "1.0.0",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.qima-inc.com:zent/zent-kit.git"
+    "url": "git@github.com:youzan/zent-kit.git"
   },
   "keywords": [
     "zent",
     "devkit",
     "react",
-    "youzan"
+    "test"
   ],
   "files": [
     "bin",
@@ -29,11 +29,9 @@
   "bin": {
     "zent-kit": "./index.js"
   },
-  "author": "zhangmengxuan",
+  "author": "Youzan FE",
   "license": "MIT",
   "dependencies": {
-    "@youzan/postcss-base64": "^0.4.4",
-    "@youzan/postcss-import": "8.1.2",
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
     "babel-core": "^6.10.4",
@@ -52,6 +50,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.5.0",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.10.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
@@ -69,14 +68,16 @@
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "open": "0.0.5",
+    "postcss-base64": "^0.6.1",
+    "postcss-easy-import": "^2.0.0",
     "postcss-inline-comment": "^3.0.0",
-    "postcss-loader": "^0.9.1",
-    "postcss-scss": "^0.1.7",
+    "postcss-loader": "^1.2.2",
+    "postcss-scss": "^0.4.0",
     "precss": "^1.4.0",
     "primer-markdown": "^3.2.0",
     "react": "15.0.2",
     "react-addons-perf": "15.0.2",
-    "react-addons-test-utils": "^15.3.1",
+    "react-addons-test-utils": "15.0.2",
     "react-dom": "15.0.2",
     "run-sequence": "^1.1.5",
     "style-loader": "^0.13.0",

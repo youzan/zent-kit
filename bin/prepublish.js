@@ -8,7 +8,7 @@ var clean = require('gulp-clean');
 var _ = require('lodash');
 var postcss = require('gulp-postcss');
 var scss = require('postcss-scss');
-var base64 = require('@youzan/postcss-base64');
+var base64 = require('postcss-base64');
 var webpack = require('webpack');
 var gutil = require('gulp-util');
 var precss = require('precss');
@@ -129,7 +129,7 @@ module.exports = function() {
         if (cssPath) {
             gulp.src(cssPath)
                 .pipe(postcss([precss, autoprefixer].concat(base64({
-                    base: path.resolve(cssPath, '..'),
+                    root: path.resolve(cssPath, '..'),
                     extensions: ['.png', '.jpg']
                 })), {syntax: scss}))
                 .pipe(rename(function(path) {

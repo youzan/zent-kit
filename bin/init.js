@@ -17,7 +17,7 @@ module.exports = function(name) {
     gulp.task('copy', function(callback) {
         gutil.log(gutil.colors.yellow('----> 开始初始化'));
 
-        exec('git clone git@gitlab.qima-inc.com:zent/zent-seed.git ' + name, function(err, stdout, stderr) {
+        exec('git clone git@github.com:youzan/zent-seed.git ' + name, function(err, stdout, stderr) {
             gutil.log('-------> 拉取 zent-seed');
             exec('rm -rf ./' + name + '/.git', function(err, stdout, stderr) {
                 callback();
@@ -59,27 +59,11 @@ module.exports = function(name) {
 
         exec('which npm', function(err, stdout, stderr) {
             var Npath = stdout.toString().trim();
-            var command = Npath + ' i --registry="http://registry.npm.qima-inc.com"';
+            var command = Npath + ' install --ignore-scripts';
             exec(command, {cwd: projectPath + '/' + name}, function(err, stdout, stderr) {
                 logger(stdout + '');
                 callback();
             });
-        });
-    });
-
-    gulp.task('install:felint', function(callback) {
-        var felintCmd = 'felint init -6 --youzan';
-        gutil.log('------> 初始化 ' + felintCmd);
-
-        exec('cd ' + name + '; ' + felintCmd, function(err, stdout, stderr) {
-            if (err) {
-                gutil.log(gutil.colors.red(stderr));
-                gutil.log(gutil.colors.red('执行 felint 指令失败，请检查本地 felint 是否正确安装后重新运行zent-kit'));
-                gutil.log(gutil.colors.green('felint 安装指令：ynpm(npm) install -g felint'));
-            } else {
-                gutil.log(gutil.colors.green('初始化完成'));
-            }
-            callback();
         });
     });
 
@@ -88,5 +72,5 @@ module.exports = function(name) {
         return;
     }
 
-    runSequence('copy', 'init:readme', 'install:npm');
+    runSequence('copy', 'init:readme', 'init:package');
 };

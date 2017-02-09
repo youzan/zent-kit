@@ -1,33 +1,49 @@
-// 传入文件名，同时改两个文件.js .jsx
-module.exports = function(pname) {
-    var readline = require('readline');
-    var fs = require('fs');
-    var dist = fs.createWriteStream(pname + 'x');
+/**
+ * 传入文件名，调整UMD的测试顺序，主要是为了兼容rjs打包
+ *
+ (function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["zent-seed"] = factory(require("react"));
+	else
+		root["zent-seed"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 
-    var lineReader = readline.createInterface({
-        input: fs.createReadStream(pname)
-    });
+转换成
 
-    var index = 0;
-    var str;
+ (function webpackUniversalModuleDefinition(root, factory) {
+    if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"));
+	else if(typeof exports === 'object')
+		exports["zent-seed"] = factory(require("react"));
+	else
+		root["zent-seed"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+ */
 
-    lineReader.on('line', function(line) {
-        // 非常粗暴直接通过行数进行修改
-        if (index === 1 || index === 2) {
-            str = '';
-        } else if (index === 3) {
-            str = line.replace(/else\s/, '');
-            str += '\n';
-        } else {
-            str = line + '\n';
-        }
+var fs = require('fs');
 
-        dist.write(str);
-        index++;
-    });
+function swapLine(lines, a, b) {
+    var line = lines[a];
+    lines[a] = lines[b];
+    lines[b] = line;
+}
 
-    // 改完之后，写回js
-    lineReader.on('close', function(line) {
-        fs.createReadStream(pname + 'x').pipe(fs.createWriteStream(pname));
-    });
+// FIXME: it's a hack
+module.exports = function(filename) {
+    var codeString = fs.readFileSync(filename, { encoding: 'utf-8' });
+    var codeLines = codeString.split('\n');
+
+    swapLine(codeLines, 2, 4);
+    swapLine(codeLines, 1, 3);
+
+    codeLines[1] = codeLines[1].replace(/else\s/, '');
+    codeLines[3] = codeLines[3].replace(/if\(/, 'else if(');
+
+    fs.writeFileSync(filename, codeLines.join('\n'), { encoding: 'utf-8' });
 };

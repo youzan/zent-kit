@@ -14,7 +14,7 @@ var loglist = function() {
     logger('            .eslintignore');
     logger('            .eslintrc');
     logger('            .gitignore');
-    logger('            zent.wepback.config.js');
+    logger('            zent.webpack.config.js');
     logger('            readme.md');
     logger('            package.json');
 };
@@ -25,7 +25,7 @@ module.exports = function(name) {
     gulp.task('reset:file', function(callback) {
         gutil.log(gutil.colors.yellow('----> 正在重新初始化', name));
 
-        exec('git archive --remote=git@gitlab.qima-inc.com:zent/zent-seed.git HEAD ' + name.join(' ') + ' | tar -x', function(err, stdout, stderr) {
+        exec('git archive --remote=git@github.com:youzan/zent-seed.git HEAD ' + name.join(' ') + ' | tar -x', function(err, stdout, stderr) {
             if (!stderr) {
                 gutil.log(gutil.colors.green('----> 重新初始化完成'));
             } else {
