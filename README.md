@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-ynpm install zent-kit -g
+npm install zent-kit -g
 ```
 
 ### 初始化组件
