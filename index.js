@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var gutil = require('gulp-util');
 var ch = require('child_process');
-var semver = require('semver')
+var semver = require('semver');
 
 var information = require('./bin/information');
 var config = require('./package.json');
