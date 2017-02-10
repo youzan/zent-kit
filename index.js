@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var gutil = require('gulp-util');
 var ch = require('child_process');
+var semver = require('semver')
 
 var information = require('./bin/information');
 var config = require('./package.json');
@@ -15,21 +16,17 @@ function checkUpdates(callback) {
         }
 
         var Npath = stdout.toString().trim();
-        var command = Npath + ' view --registry="http://registry.npm.qima-inc.com" @youzan/zent-kit version';
+        var command = Npath + ' view zent-kit version';
         ch.exec(command, function(err, stdout, stderr) {
             if (err) {
                 logger(gutil.colors.red(err));
                 process.exit(1);
             }
 
-            var toVersionNumber = function(versionString) {
-                return parseInt(versionString.trim().replace(/\./g, ''), 10);
-            };
+            var localVersion = config.version.trim();
+            var remoteVersion = stdout.trim();
 
-            var localVersion = toVersionNumber(config.version);
-            var remoteVersion = toVersionNumber(stdout);
-
-            if (localVersion < remoteVersion) {
+            if (semver.lt(localVersion, remoteVersion)) {
                 logger(gutil.colors.yellow('Update available, please upgrade to %s'), stdout.trim());
                 logger(gutil.colors.gray('You have %s installed'), config.version);
 

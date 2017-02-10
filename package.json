@@ -80,6 +80,7 @@
     "react-addons-test-utils": "15.0.2",
     "react-dom": "15.0.2",
     "run-sequence": "^1.1.5",
+    "semver": "^5.3.0",
     "style-loader": "^0.13.0",
     "tmp": "0.0.31",
     "url-loader": "^0.5.7",
