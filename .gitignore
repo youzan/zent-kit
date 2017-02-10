@@ -6,3 +6,6 @@ build
 npm-debug.log
 .vscode/
 .git_hooks/
+.felintrc
+.felint/
+.multi_hooks/
