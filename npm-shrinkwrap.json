@@ -1,6 +1,6 @@
 {
   "name": "zent-kit",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "dependencies": {
     "abab": {
       "version": "1.0.3",
