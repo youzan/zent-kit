@@ -55,7 +55,7 @@ zent-kit prepublish
 -- package.json
 
 // 生成文件(由zent-kit生成)
--- readme.md
+-- README.md
     // 由package.json和src下文件生成
 -- lib
     // 经过babel转码的组件文件以及编译过的css

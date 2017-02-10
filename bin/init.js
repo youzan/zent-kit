@@ -29,8 +29,8 @@ module.exports = function(name) {
     gulp.task('init:readme', function(callback) {
         gutil.log('-------> 生成 readme');
 
-        var documentation = fs.readFileSync(path.resolve(__dirname, '../readme.md'));
-        var fileName = path.resolve(projectPath, './' + name + '/readme.md');
+        var documentation = fs.readFileSync(path.resolve(__dirname, '../README.md'));
+        var fileName = path.resolve(projectPath, './' + name + '/README.md');
         var file = _.template(fs.readFileSync(fileName))({
             name: name,
             documentation: documentation

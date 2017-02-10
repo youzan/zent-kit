@@ -7,7 +7,7 @@ module.exports = function(entry, output) {
         watch: true,
         // devtool: 'source-map',
         postcss: function(webpack) {
-            return postcssPlugin(webpack, true);
+            return postcssPlugin;
         },
         plugins: [new LiveReloadPlugin()]
     };

@@ -1,4 +1,6 @@
 var sassArr = ['style-loader', 'css-loader', 'postcss-loader'].map(require.resolve);
+sassArr[2] += '?parser=postcss-scss';
+
 var postcssPlugin = require('./postcss.conf');
 var babelPackages = require('./babelPackages');
 
@@ -21,7 +23,7 @@ module.exports = function(entry, output, env) {
             }
         ]},
         postcss: function(webpack) {
-            return postcssPlugin(webpack, false);
+            return postcssPlugin;
         },
         entry: [entry],
         output: {

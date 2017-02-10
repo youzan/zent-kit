@@ -15,7 +15,7 @@ var loglist = function() {
     logger('            .eslintrc');
     logger('            .gitignore');
     logger('            zent.webpack.config.js');
-    logger('            readme.md');
+    logger('            README.md');
     logger('            package.json');
 };
 

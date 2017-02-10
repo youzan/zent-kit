@@ -11,13 +11,13 @@ var scss = require('postcss-scss');
 var base64 = require('postcss-base64');
 var webpack = require('webpack');
 var gutil = require('gulp-util');
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
 
 var switchUMD = require('./switchUMD');
+
+var postcssPlugin = require('../webpack/postcss.conf');
 
 var babelPackages = require('../webpack/babelPackages');
 
@@ -34,7 +34,7 @@ var paths = {
     webpack: path.resolve(__dirname, '../webpack/webpack.prepublish.js'),
 
     // 项目readme的源文件
-    readmeSrc: path.join(__dirname, '../manual/readme.md')
+    readmeSrc: path.join(__dirname, '../manual/README.md')
 };
 
 // 读取src下文件
@@ -93,7 +93,7 @@ module.exports = function() {
           }, config)
         );
 
-        fs.writeFile(path.join(paths.projectPath, '/readme.md'), readme);
+        fs.writeFile(path.join(paths.projectPath, '/README.md'), readme);
     });
 
     //
@@ -128,10 +128,10 @@ module.exports = function() {
         var cssPath = checkfile('assets/' + name + '.scss');
         if (cssPath) {
             gulp.src(cssPath)
-                .pipe(postcss([precss, autoprefixer].concat(base64({
+                .pipe(postcss(postcssPlugin.slice().concat(base64({
                     root: path.resolve(cssPath, '..'),
                     extensions: ['.png', '.jpg']
-                })), {syntax: scss}))
+                })), {parser: scss}))
                 .pipe(rename(function(path) {
                     path.extname = '.css';
                 }))

@@ -75,7 +75,7 @@ var exportEX = function *(next) {
 router.get('/readme', function *(next) {
     gutil.log(gutil.colors.blue('-------> GET: readme\n'));
 
-    var readmePath = checkfile('readme.md');
+    var readmePath = checkfile('README.md');
     var readme = readmePath ? fs.readFileSync(readmePath, 'utf8') : '';
     var data = {
         navList: navList,
