@@ -26,11 +26,15 @@ function checkUpdates(callback) {
             var localVersion = config.version.trim();
             var remoteVersion = stdout.trim();
 
-            if (semver.lt(localVersion, remoteVersion)) {
-                logger(gutil.colors.yellow('Update available, please upgrade to %s'), stdout.trim());
-                logger(gutil.colors.gray('You have %s installed'), config.version);
+            if (!remoteVersion) {
+                logger(gutil.colors.yellow('Failed to check for updates'));
+            } else {
+                if (semver.lt(localVersion, remoteVersion)) {
+                    logger(gutil.colors.yellow('Update available, please upgrade to %s'), stdout.trim());
+                    logger(gutil.colors.gray('You have %s installed'), config.version);
 
-                return;
+                    return;
+                }
             }
 
             callback();
