@@ -15,10 +15,13 @@ module.exports = function(name) {
 
     // 项目规范文件拷贝
     gulp.task('copy', function(callback) {
-        gutil.log(gutil.colors.yellow('----> 开始初始化'));
+        gutil.log('-------> 拉取 zent-seed');
+        exec('git clone https://github.com/youzan/zent-seed.git ' + name, function(err, stdout, stderr) {
+            if (err) {
+                gutil.log(gutil.colors.red(stderr));
+                process.exit(-1);
+            }
 
-        exec('git clone git@github.com:youzan/zent-seed.git ' + name, function(err, stdout, stderr) {
-            gutil.log('-------> 拉取 zent-seed');
             exec('rm -rf ./' + name + '/.git', function(err, stdout, stderr) {
                 callback();
             });
@@ -72,5 +75,6 @@ module.exports = function(name) {
         return;
     }
 
+    gutil.log(gutil.colors.yellow('----> 开始初始化'));
     runSequence('copy', 'init:readme', 'init:package');
 };
