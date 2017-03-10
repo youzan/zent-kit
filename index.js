@@ -30,7 +30,7 @@ function checkUpdates(callback) {
                 logger(gutil.colors.yellow('Failed to check for updates'));
             } else {
                 if (semver.lt(localVersion, remoteVersion)) {
-                    logger(gutil.colors.yellow('Update available, please upgrade to %s'), stdout.trim());
+                    logger(gutil.colors.yellow('Update available, please upgrade to %s (npm install -g zent-kit)'), stdout.trim());
                     logger(gutil.colors.gray('You have %s installed'), config.version);
 
                     return;
