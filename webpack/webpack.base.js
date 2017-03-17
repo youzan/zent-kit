@@ -20,6 +20,13 @@ module.exports = function(entry, output, env) {
             }, {
                 test: /\.(css|scss)$/,
                 loader: sassArr.join('!')
+            }, {
+                test: /\.(eot|ttf|woff|woff2)$/,
+                loader: require.resolve('file-loader'),
+                query: {
+                    name: '[name].[ext]',
+                    publicPath: '/'
+                }
             }
         ]},
         postcss: function(webpack) {
