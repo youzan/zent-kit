@@ -3,8 +3,8 @@ node_modules
 build
 .tmp
 .DS_Store
-npm-debug.log
 .vscode/
 .git_hooks/
 .felintrc
 .multi_hooks/
+*.log

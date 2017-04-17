@@ -10,6 +10,8 @@ var hljs = require('highlight.js');
 var marked = require('marked');
 var open = require('open');
 var gutil = require('gulp-util');
+var tmp = require('tmp');
+var mkdirp = require('mkdirp');
 
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
@@ -23,9 +25,29 @@ marked.setOptions({
     }
 });
 
+function copyNodeModulesStyles() {
+    var styles = [
+        'highlight.js/styles/github.css',
+        'primer-markdown/build/build.css',
+    ]
+    var resolvedStyles = styles.map(require.resolve);
+
+    var tmpStyleDir = tmp.dirSync();
+
+    styles.forEach((f, idx) => {
+        var src = resolvedStyles[idx];
+        var dst = path.join(tmpStyleDir.name, path.dirname(f));
+        mkdirp.sync(dst);
+
+        fs.createReadStream(src).pipe(fs.createWriteStream(path.join(dst, path.basename(f))));
+    });
+
+    return tmpStyleDir.name;
+}
+
 var projectPath = process.cwd();
 var paths = {
-    nodeModules: path.resolve(__dirname, '../node_modules'),
+    nodeModules: copyNodeModulesStyles(),
     manualPath: path.resolve(__dirname, '../manual'), //  服务端资源
     assetsPath: path.resolve(__dirname, '../assets'),   // 服务端静态资源
     tmp: path.resolve(__dirname, '../.tmp'),    // 服务端开发文件

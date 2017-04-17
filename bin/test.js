@@ -6,6 +6,8 @@ var fs = require('fs');
 var jsonfile = require('jsonfile');
 var tmp = require('tmp');
 
+tmp.setGracefulCleanup();
+
 function getJestAbsolutePath(filename) {
     return path.resolve(__dirname, '../jest', filename);
 }
