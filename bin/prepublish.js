@@ -72,7 +72,9 @@ function getComment(list) {
 
 var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
 
-module.exports = function() {
+module.exports = function(options) {
+    options = options || {};
+
     // 旧文件 删除
     gulp.task('clean', function() {
         gutil.log('------->   Clean  lib & dist');
@@ -112,10 +114,15 @@ module.exports = function() {
 
     // js 转码
     gulp.task('babel', function() {
+        var plugins = babelPackages.prepublish.plugins;
+        if (options.umd) {
+            plugins = plugins.concat('babel-plugin-transform-es2015-modules-umd');
+        }
+
         return gulp.src([path.join(paths.src, '/**/*.jsx'), path.join(paths.src, '/**/*.js')])
             .pipe(babel({
                 presets: babelPackages.prepublish.presets.map(require.resolve),
-                plugins: babelPackages.prepublish.plugins.map(require.resolve)
+                plugins: plugins.map(require.resolve)
             }))
             .pipe(gulp.dest(paths.lib));
     });

@@ -75,7 +75,9 @@ function main() {
         case 'prepublish':
             var pre = require('./bin/prepublish');
             gutil.log(gutil.colors.green('-> 发布预处理\n'));
-            pre();
+            pre({
+                umd: args.indexOf('--umd') !== -1
+            });
             break;
 
         case 'get':
