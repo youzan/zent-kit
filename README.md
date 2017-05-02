@@ -1,6 +1,6 @@
 # zent-kit
 
-[zent组件库](https://github.com/youzan/zent)开发脚手架
+组件库开发脚手架
 
 [![NPM](https://nodei.co/npm/zent-kit.png)](https://nodei.co/npm/zent-kit/)
 
