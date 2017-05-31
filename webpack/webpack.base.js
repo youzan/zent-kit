@@ -13,7 +13,8 @@ module.exports = function(entry, output, env) {
                 query: {
                     presets: packages.presets.map(require.resolve),
                     plugins: packages.plugins.map(require.resolve)
-                }
+                },
+                exclude: /node_modules/
             }, {
                 test: /\.(png|jpg|jpeg)$/,
                 loader: require.resolve('url-loader')
