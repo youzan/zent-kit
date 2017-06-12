@@ -31,21 +31,21 @@ module.exports = function(buildDir) {
     });
 
     gulp.task('clean', function() {
-        gutil.log('------->   Clean  old examples');
+        gutil.log('Clean  old examples');
 
         return gulp.src([buildDir + '/*', '!' + buildDir + '/node_modules'], {read: false})
             .pipe(clean({force: true}));
     });
 
     gulp.task('link:examples', function() {
-        gutil.log('------->    Read  new examples');
+        gutil.log('Read  new examples');
 
         return gulp.src(paths.examples)
             .pipe(symlink(buildDir + '/examples', {force: true}));
     });
 
     gulp.task('link:assets', function() {
-        gutil.log('------->    Read  new assets');
+        gutil.log('Read  new assets');
 
         return gulp.src(paths.assets)
             .pipe(symlink(buildDir + '/assets', {force: true}));

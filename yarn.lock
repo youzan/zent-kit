@@ -1904,10 +1904,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-fs@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.2.tgz#e1f244ef3933c1b2a64bd4799136060d0f5914f8"
-
 fsevents@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.1.1.tgz#f19fd28f43eeaf761680e519a203c4d0b3d31aff"
@@ -3924,13 +3920,6 @@ postcss-atroot@^0.1.2:
   resolved "https://registry.yarnpkg.com/postcss-atroot/-/postcss-atroot-0.1.3.tgz#6752c0230c745140549345b2b0e30ebeda01a405"
   dependencies:
     postcss "^5.0.5"
-
-postcss-base64@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/postcss-base64/-/postcss-base64-0.6.1.tgz#a129e28345d51444c3837eec6bafff9d54f4e512"
-  dependencies:
-    fs "0.0.2"
-    postcss "^5.0.12"
 
 postcss-calc@^5.2.0:
   version "5.3.1"

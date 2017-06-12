@@ -23,11 +23,11 @@ module.exports = function(name) {
 
     // 项目规范文件拷贝
     gulp.task('reset:file', function(callback) {
-        gutil.log(gutil.colors.yellow('----> 正在重新初始化', name));
+        gutil.log(gutil.colors.yellow('正在重新初始化', name));
 
         exec('git archive --remote=git@github.com:youzan/zent-seed.git HEAD ' + name.join(' ') + ' | tar -x', function(err, stdout, stderr) {
             if (!stderr) {
-                gutil.log(gutil.colors.green('----> 重新初始化完成'));
+                gutil.log(gutil.colors.green('重新初始化完成'));
             } else {
                 gutil.log('\n', gutil.colors.red(stderr));
                 loglist();

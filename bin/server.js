@@ -71,7 +71,7 @@ module.exports = function(buildDir) {
 
   var exportEX = function*(next) {
     var example = this.params.example;
-    gutil.log(gutil.colors.blue('-------> GET: example', example, '\n'));
+    gutil.log(gutil.colors.blue('GET: example', example, '\n'));
 
     var filePath = `${paths.projectPath}/examples/${example}.js`;
     var originFile = fs.readFileSync(filePath, 'utf8');
@@ -99,7 +99,7 @@ module.exports = function(buildDir) {
 
   // router: readme
   router.get('/readme', function*(next) {
-    gutil.log(gutil.colors.blue('-------> GET: readme\n'));
+    gutil.log(gutil.colors.blue('GET: readme\n'));
 
     var readmePath = checkfile('README.md');
     var readme = readmePath ? fs.readFileSync(readmePath, 'utf8') : '';
@@ -135,8 +135,8 @@ module.exports = function(buildDir) {
 
   // 项目启动
   app.listen(port);
-  gutil.log(gutil.colors.blue('------->   Server started on ', port));
-  logger('<--------------------------------------------------\n');
+  gutil.log(gutil.colors.blue('Server started on ', port));
+  logger('\n');
 
   // 启动浏览器
   open('http://localhost:' + port);

@@ -8,10 +8,10 @@ var clean = require('gulp-clean');
 var _ = require('lodash');
 var postcss = require('gulp-postcss');
 var scss = require('postcss-scss');
-var base64 = require('postcss-base64');
 var webpack = require('webpack');
 var gutil = require('gulp-util');
 
+var base64 = require('./postcss-base64');
 var checkfile = require('./checkfile');
 var logger = console.log.bind(console);
 
@@ -27,6 +27,7 @@ var paths = {
     projectPath: projectPath,
     src: path.join(projectPath, '/src'),
     lib: path.join(projectPath, '/lib/'),
+    css: path.join(projectPath, '/css/'),
     dist: path.join(projectPath, '/dist/'),
     index: path.join(projectPath, '/src/index'),
 
@@ -70,6 +71,19 @@ function getComment(list) {
     return result.join('');
 }
 
+function runPostcss(src, out, base64Root) {
+    gulp.src(src)
+        .pipe(postcss(postcssPlugin.slice().concat(base64({
+            root: base64Root,
+            extensions: ['.png', '.jpg'],
+            exclude: /^https?:\/\/.+$/i
+        })), {parser: scss}))
+        .pipe(rename(function(path) {
+            path.extname = '.css';
+        }))
+        .pipe(gulp.dest(out));
+}
+
 var webpackConfig = require(paths.webpack)(paths.index, paths.dist);
 
 module.exports = function(options) {
@@ -77,15 +91,15 @@ module.exports = function(options) {
 
     // 旧文件 删除
     gulp.task('clean', function() {
-        gutil.log('------->   Clean  lib & dist');
+        gutil.log('Clean  lib, css and dist');
 
-        return gulp.src([paths.lib + '*', paths.dist + '*'], {read: false})
+        return gulp.src([paths.lib + '*', paths.dist + '*', paths.css + '*'], {read: false})
             .pipe(clean({force: true}));
     });
 
     // readme 制作
     gulp.task('prepare:md', function() {
-        gutil.log('-------> Prepare  README');
+        gutil.log('Prepare  README');
 
         var files = getContent(paths.src);
         var comments = getComment(files);
@@ -100,13 +114,13 @@ module.exports = function(options) {
 
     //
     gulp.task('prepare:js', ['webpack'], function() {
-        gutil.log('-------> Prepare  JS');
+        gutil.log('Prepare  JS');
 
         var list = fs.readdirSync(paths.dist);
 
         for (var i = 0, len = list.length; i < len; i++) {
             if (/\.js?$/.test(list[i])) {
-                logger('修改umd头=======>\t' + list[i]);
+                logger('修改umd头\t' + list[i]);
                 switchUMD(paths.dist + list[i]);
             }
         }
@@ -129,21 +143,26 @@ module.exports = function(options) {
 
     // css 转码
     gulp.task('prepare:css', function() {
-        gutil.log('-------> Prepare  CSS');
+        gutil.log('Prepare  CSS');
 
         var name = config.zent && config.zent.sass ? config.zent.sass : 'index';
         var cssPath = checkfile('assets/' + name + '.scss');
+        var base64Root = path.resolve(cssPath, '..');
         if (cssPath) {
-            gulp.src(cssPath)
-                .pipe(postcss(postcssPlugin.slice().concat(base64({
-                    root: path.resolve(cssPath, '..'),
-                    extensions: ['.png', '.jpg']
-                })), {parser: scss}))
-                .pipe(rename(function(path) {
-                    path.extname = '.css';
-                }))
-                .pipe(gulp.dest(paths.lib));
+            runPostcss(cssPath, paths.lib, base64Root);
         }
+
+        // 对整个 assets 目录下的 scss 转码
+        if (options.transpileCSS) {
+            gutil.log('Transpile CSS');
+
+            runPostcss(
+                ['assets/**/*.scss', '!assets/**/_*.scss'],
+                paths.css,
+                base64Root
+            );
+        }
+
     });
 
     gulp.task('webpack', ['babel'], function(callback) {

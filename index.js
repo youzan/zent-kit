@@ -76,7 +76,8 @@ function main() {
             var pre = require('./bin/prepublish');
             gutil.log(gutil.colors.green('-> 发布预处理\n'));
             pre({
-                umd: args.indexOf('--umd') !== -1
+                umd: args.indexOf('--umd') !== -1,
+                transpileCSS: args.indexOf('--transpile-css') !== -1
             });
             break;
 

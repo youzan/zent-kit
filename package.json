@@ -70,7 +70,6 @@
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
     "open": "0.0.5",
-    "postcss-base64": "^0.6.1",
     "postcss-easy-import": "^2.0.0",
     "postcss-inline-comment": "^3.0.0",
     "postcss-loader": "^1.2.2",

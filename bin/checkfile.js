@@ -14,7 +14,7 @@ module.exports = function(dir) {
     }
 
     if (!hasFile) {
-        looger('-------> %s', filePath);
+        looger('%s', filePath);
         looger('   未能在以上路径找到%s, 请考虑使用"zent-kit init"对项目初始化', dir);
         return false;
     }
