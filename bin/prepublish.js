@@ -147,7 +147,8 @@ module.exports = function(options) {
 
         var name = config.zent && config.zent.sass ? config.zent.sass : 'index';
         var cssPath = checkfile('assets/' + name + '.scss');
-        var base64Root = path.resolve(cssPath, '..');
+        // var base64Root = path.resolve(cssPath, '..');
+        var base64Root = path.resolve('.');
         if (cssPath) {
             runPostcss(cssPath, paths.lib, base64Root);
         }

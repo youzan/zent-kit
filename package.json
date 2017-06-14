@@ -1,6 +1,6 @@
 {
   "name": "zent-kit",
-  "version": "1.1.4",
+  "version": "1.2.1",
   "description": "React组件开发工具",
   "main": "index.js",
   "scripts": {
