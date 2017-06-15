@@ -147,7 +147,7 @@ module.exports = function(options) {
 
         var cssPath = checkfile('assets/index.scss');
         // var base64Root = path.resolve(cssPath, '..');
-        var base64Root = path.resolve('..');
+        var base64Root = path.resolve('./assets');
         if (cssPath) {
             runPostcss(cssPath, paths.lib, base64Root);
         }
