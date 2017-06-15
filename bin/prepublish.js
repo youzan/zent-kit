@@ -145,10 +145,9 @@ module.exports = function(options) {
     gulp.task('prepare:css', function() {
         gutil.log('Prepare  CSS');
 
-        var name = config.zent && config.zent.sass ? config.zent.sass : 'index';
-        var cssPath = checkfile('assets/' + name + '.scss');
+        var cssPath = checkfile('assets/index.scss');
         // var base64Root = path.resolve(cssPath, '..');
-        var base64Root = path.resolve('.');
+        var base64Root = path.resolve('..');
         if (cssPath) {
             runPostcss(cssPath, paths.lib, base64Root);
         }
