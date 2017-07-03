@@ -75,7 +75,7 @@ function runPostcss(src, out, base64Root) {
     gulp.src(src)
         .pipe(postcss(postcssPlugin.slice().concat(base64({
             root: base64Root,
-            extensions: ['.png', '.jpg'],
+            extensions: ['.png', '.jpg', '.gif'],
             exclude: /^https?:\/\/.+$/i
         })), {parser: scss}))
         .pipe(rename(function(path) {
