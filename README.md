@@ -1,4 +1,7 @@
-# zent-kit
+# [DEPRECATED]zent-kit
+
+`zent-kit` is not supported, please consider other tools.
+`zent-kit` 不维护了，请使用别的工具。
 
 组件库开发脚手架
 
